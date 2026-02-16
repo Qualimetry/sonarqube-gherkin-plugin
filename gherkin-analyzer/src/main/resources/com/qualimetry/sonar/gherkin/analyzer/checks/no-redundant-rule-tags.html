@@ -1,0 +1,49 @@
+<p>
+  Scenario-level tags within a <code>Rule</code> block must not duplicate tags
+  already set on the enclosing <code>Rule</code>. Tags defined on a
+  <code>Rule</code> are inherited by all scenarios within that Rule, so
+  repeating them at the scenario level is redundant and should be removed.
+</p>
+
+<h2>Noncompliant Code Example</h2>
+<pre>
+Feature: Payment processing
+
+  @api-test
+  Rule: Credit card payments
+
+    @api-test                       <!-- Noncompliant -->
+    Scenario: Process Visa payment
+      Given the customer has a Visa card
+      When the customer pays with Visa
+      Then the payment is processed
+
+    Scenario: Process Mastercard payment
+      Given the customer has a Mastercard
+      When the customer pays with Mastercard
+      Then the payment is processed
+</pre>
+
+<h2>Compliant Solution</h2>
+<pre>
+Feature: Payment processing
+
+  @api-test
+  Rule: Credit card payments
+
+    Scenario: Process Visa payment
+      Given the customer has a Visa card
+      When the customer pays with Visa
+      Then the payment is processed
+
+    Scenario: Process Mastercard payment
+      Given the customer has a Mastercard
+      When the customer pays with Mastercard
+      Then the payment is processed
+</pre>
+
+<h2>See Also</h2>
+<ul>
+  <li><code>no-redundant-tags</code> — flags scenario tags duplicating Feature-level or Rule-level tags</li>
+  <li><code>rule-tag-placement</code> — suggests moving common scenario tags to the Rule level</li>
+</ul>

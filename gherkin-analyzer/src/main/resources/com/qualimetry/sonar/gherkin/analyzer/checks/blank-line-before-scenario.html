@@ -1,0 +1,45 @@
+<p>
+  A blank line should precede each <code>Scenario</code>, <code>Scenario Outline</code>,
+  <code>Scenario Template</code>, or <code>Example</code> keyword for readability. This
+  visual separation makes it easier to scan a feature file and identify where each test
+  scenario begins.
+</p>
+<p>
+  This rule mirrors the <code>examples-separator-line</code> rule, which enforces the same
+  pattern for <code>Examples</code> sections. When a scenario has tags, the blank line should
+  appear before the first tag line.
+</p>
+
+<h2>Noncompliant Code Example</h2>
+<pre>
+Feature: Order processing
+  Scenario: Place an order  <!-- Noncompliant — no blank line before Scenario -->
+    Given a customer with an account
+    When the customer adds an item to the cart
+    Then the order is created
+  Scenario: Cancel an order  <!-- Noncompliant — no blank line before Scenario -->
+    Given an existing order
+    When the customer cancels the order
+    Then the order status is cancelled
+</pre>
+
+<h2>Compliant Solution</h2>
+<pre>
+Feature: Order processing
+
+  Scenario: Place an order
+    Given a customer with an account
+    When the customer adds an item to the cart
+    Then the order is created
+
+  Scenario: Cancel an order
+    Given an existing order
+    When the customer cancels the order
+    Then the order status is cancelled
+</pre>
+
+<h2>See Also</h2>
+<ul>
+  <li><code>examples-separator-line</code> — enforces blank lines before Examples sections.</li>
+  <li><code>consistent-indentation</code> — enforces consistent indentation throughout the file.</li>
+</ul>

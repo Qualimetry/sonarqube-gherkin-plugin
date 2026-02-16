@@ -1,0 +1,59 @@
+<p>Certain tags are intended for local development only and should not be committed
+to the repository. Tags like <code>@wip</code>, <code>@debug</code>, <code>@ignore</code>,
+and <code>@manual</code> are common examples that indicate work-in-progress or temporary
+states. This rule flags any tag whose name (without the leading <code>@</code>) appears
+in a configurable restricted list.</p>
+
+<h2>Noncompliant Code Example</h2>
+<pre>
+Feature: Payment processing
+
+  @wip <!-- Noncompliant -->
+  Scenario: Process credit card payment
+    Given a valid credit card
+    When the payment is submitted
+    Then the payment is approved
+
+  @debug @smoke <!-- Noncompliant on @debug only -->
+  Scenario: Process refund
+    Given a completed payment
+    When a refund is requested
+    Then the refund is processed
+</pre>
+
+<h2>Compliant Solution</h2>
+<pre>
+Feature: Payment processing
+
+  @smoke
+  Scenario: Process credit card payment
+    Given a valid credit card
+    When the payment is submitted
+    Then the payment is approved
+
+  @smoke
+  Scenario: Process refund
+    Given a completed payment
+    When a refund is requested
+    Then the refund is processed
+</pre>
+
+<h2>Configuration</h2>
+<table>
+  <thead>
+    <tr><th>Parameter</th><th>Description</th><th>Default</th></tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>restrictedTags</code></td>
+      <td>Comma-separated list of restricted tag names (without leading <code>@</code>).</td>
+      <td><code>wip,debug,ignore,manual</code></td>
+    </tr>
+  </tbody>
+</table>
+
+<h2>See Also</h2>
+<ul>
+  <li><code>required-tags</code> — requires at least one tag matching a pattern.</li>
+  <li><code>tag-name-pattern</code> — validates tag naming conventions.</li>
+</ul>

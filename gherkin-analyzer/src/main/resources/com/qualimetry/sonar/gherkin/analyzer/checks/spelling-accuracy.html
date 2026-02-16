@@ -1,0 +1,39 @@
+<p>
+  Feature files should be free of spelling mistakes. Misspelled words in
+  feature and scenario names, step text, and descriptions reduce readability
+  and can make it harder to search for or understand test intent.
+</p>
+
+<p>
+  This rule uses LanguageTool (English, en-US) to check spelling only.
+  Grammar and style rules are disabled. Add product names, technical terms,
+  and domain vocabulary to the <strong>wordsToIgnore</strong> parameter
+  (comma-separated) to avoid false positives.
+</p>
+
+<h2>Noncompliant Code Example</h2>
+<pre>
+Feature: User autentication                              &lt;!-- typo: "autentication" --&gt;
+
+  Scenario: Login with valid credntials                  &lt;!-- typo: "credntials" --&gt;
+    Given the user has a registred account               &lt;!-- typo: "registred" --&gt;
+    When the user logs in with valid credentials
+    Then the user is authentcated                         &lt;!-- typo: "authentcated" --&gt;
+</pre>
+
+<h2>Compliant Solution</h2>
+<pre>
+Feature: User authentication
+
+  Scenario: Login with valid credentials
+    Given the user has a registered account
+    When the user logs in with valid credentials
+    Then the user is authenticated
+</pre>
+
+<h2>Parameter</h2>
+<ul>
+  <li><strong>wordsToIgnore</strong> — Comma-separated list of words to exclude from spell
+  checking (e.g. product names, technical terms, acronyms). Use this to reduce
+  false positives for valid domain vocabulary.</li>
+</ul>

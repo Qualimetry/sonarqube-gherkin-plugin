@@ -1,0 +1,49 @@
+<p>
+  Tags common to all scenarios within a <code>Rule</code> block should be moved
+  to the <code>Rule</code> level instead of being repeated on each scenario.
+  This reduces duplication and makes it clear that the tag applies to all
+  scenarios within the Rule.
+</p>
+
+<h2>Noncompliant Code Example</h2>
+<pre>
+Feature: Payment processing
+
+  Rule: Credit card payments          <!-- Noncompliant -->
+
+    @api-test
+    Scenario: Process Visa payment
+      Given the customer has a Visa card
+      When the customer pays with Visa
+      Then the payment is processed
+
+    @api-test
+    Scenario: Process Mastercard payment
+      Given the customer has a Mastercard
+      When the customer pays with Mastercard
+      Then the payment is processed
+</pre>
+
+<h2>Compliant Solution</h2>
+<pre>
+Feature: Payment processing
+
+  @api-test
+  Rule: Credit card payments
+
+    Scenario: Process Visa payment
+      Given the customer has a Visa card
+      When the customer pays with Visa
+      Then the payment is processed
+
+    Scenario: Process Mastercard payment
+      Given the customer has a Mastercard
+      When the customer pays with Mastercard
+      Then the payment is processed
+</pre>
+
+<h2>See Also</h2>
+<ul>
+  <li><code>tag-placement</code> — suggests moving common tags to Feature or Rule level</li>
+  <li><code>no-redundant-rule-tags</code> — flags scenario tags duplicating Rule-level tags</li>
+</ul>

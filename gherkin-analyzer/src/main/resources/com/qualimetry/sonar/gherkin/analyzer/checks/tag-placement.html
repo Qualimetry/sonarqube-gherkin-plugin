@@ -1,0 +1,53 @@
+<p>
+  Tags that are common to all scenarios within a Feature should be placed at the
+  Feature level instead of being repeated on each scenario. This reduces
+  duplication, improves maintainability, and makes it clear which tags apply to
+  the entire Feature scope.
+</p>
+
+<h2>Noncompliant Code Example</h2>
+<p>Tags repeated on every scenario that should be at the Feature level:</p>
+<pre>
+Feature: Payment processing                &lt;!-- Noncompliant --&gt;
+
+  @smoke @regression
+  Scenario: Process credit card payment
+    Given the customer has items in cart
+    When the customer completes checkout
+    Then payment is processed
+
+  @smoke @regression
+  Scenario: Process PayPal payment
+    Given the customer has items in cart
+    When the customer selects PayPal
+    Then payment is processed
+</pre>
+
+<h2>Compliant Solution</h2>
+<p>Common tags moved to the Feature level:</p>
+<pre>
+@smoke @regression
+Feature: Payment processing
+
+  Scenario: Process credit card payment
+    Given the customer has items in cart
+    When the customer completes checkout
+    Then payment is processed
+
+  Scenario: Process PayPal payment
+    Given the customer has items in cart
+    When the customer selects PayPal
+    Then payment is processed
+</pre>
+
+<p>
+  Note: If a tag appears on most but not all scenarios, it should remain at the
+  scenario level. Only tags that appear on <strong>every</strong> scenario within
+  the Feature should be promoted. Rule-level tag promotion is handled by the
+  companion rule <code>rule-tag-placement</code>.
+</p>
+
+<h2>See Also</h2>
+<ul>
+  <li><code>rule-tag-placement</code> — suggests moving common tags to the Rule level</li>
+</ul>

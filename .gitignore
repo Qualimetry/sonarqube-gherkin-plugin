@@ -1,0 +1,34 @@
+# IDE
+.idea/
+*.iml
+*.ipr
+*.iws
+.vs/
+slnx.sqlite
+**/slnx.sqlite
+*.sqlite
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# Build
+target/
+*.class
+*.jar
+!**/src/main/resources/**/*.jar
+
+# OS
+.DS_Store
+Thumbs.db
+/.vs/slnx.sqlite
+
+# Maven Shade plugin
+dependency-reduced-pom.xml
+
+# Node / VS Code extension
+node_modules/
+out/
+dist/
+*.vsix
+vscode-client/server/

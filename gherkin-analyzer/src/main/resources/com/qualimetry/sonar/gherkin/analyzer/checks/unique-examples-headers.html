@@ -1,0 +1,49 @@
+<p>
+  Column names in an Examples table must be unique. Duplicate column headers
+  create ambiguous variable substitution — the test framework cannot determine
+  which column to use when a step references a placeholder that matches
+  multiple headers. This is always a defect that will cause incorrect or
+  unpredictable test behaviour.
+</p>
+
+<h2>Noncompliant Code Example</h2>
+<pre>
+Feature: User registration
+
+  Scenario Outline: Register a new user
+    Given the user enters "&lt;username&gt;" in the name field
+    And the user enters "&lt;username&gt;" in the confirmation field
+    Then the registration should succeed
+
+    Examples:                                &lt;!-- Noncompliant --&gt;
+      | username | email             | username |
+      | alice    | alice@example.com | alice    |
+      | bob      | bob@example.com   | bob      |
+</pre>
+<p>
+  The header <code>username</code> appears twice. The test runner cannot
+  determine which column to use for <code>&lt;username&gt;</code>
+  substitution.
+</p>
+
+<h2>Compliant Solution</h2>
+<p>Give each column a unique, descriptive name:</p>
+<pre>
+Feature: User registration
+
+  Scenario Outline: Register a new user
+    Given the user enters "&lt;username&gt;" in the name field
+    And the user enters "&lt;confirmation&gt;" in the confirmation field
+    Then the registration should succeed
+
+    Examples:
+      | username | email             | confirmation |
+      | alice    | alice@example.com | alice        |
+      | bob      | bob@example.com   | bob          |
+</pre>
+
+<h2>Exceptions</h2>
+<p>
+  This rule does not apply to plain Scenarios (without Examples tables).
+  Empty Examples sections with no rows are also ignored.
+</p>

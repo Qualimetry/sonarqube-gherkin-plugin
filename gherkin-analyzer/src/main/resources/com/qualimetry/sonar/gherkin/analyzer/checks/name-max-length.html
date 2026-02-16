@@ -1,0 +1,44 @@
+<p>Feature, Scenario, and Rule names should not exceed a configurable maximum length.
+Excessively long names are difficult to read in reports, IDE tooltips, CI logs, and
+SonarQube dashboards. The default maximum is 120 characters, which aligns with
+common line-length conventions.</p>
+
+<h2>Noncompliant Code Example</h2>
+<pre>
+Feature: This is an extremely long feature name that goes on and on describing every little detail of the entire feature in a single line which is very hard to read
+
+  <!-- Noncompliant: scenario name exceeds 120 characters -->
+  Scenario: Verify that when a user enters their username and password and clicks the login button then they are redirected to the main dashboard page showing all widgets
+    Given a registered user
+    When the user logs in
+    Then the dashboard is displayed
+</pre>
+
+<h2>Compliant Solution</h2>
+<pre>
+Feature: User authentication
+
+  Scenario: Successful login redirects to dashboard
+    Given a registered user
+    When the user logs in
+    Then the dashboard is displayed
+</pre>
+
+<h2>Configuration</h2>
+<table>
+  <thead>
+    <tr><th>Parameter</th><th>Description</th><th>Default</th></tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>maxLength</code></td>
+      <td>Maximum allowed length for Feature, Scenario, and Rule names.</td>
+      <td><code>120</code></td>
+    </tr>
+  </tbody>
+</table>
+
+<h2>See Also</h2>
+<ul>
+  <li><code>step-sentence-max-length</code> — limits the length of individual step sentences.</li>
+</ul>

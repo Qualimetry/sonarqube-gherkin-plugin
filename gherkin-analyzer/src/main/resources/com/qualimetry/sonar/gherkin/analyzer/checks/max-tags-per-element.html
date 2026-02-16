@@ -1,0 +1,46 @@
+<p>
+  Checks that <code>Feature</code>, <code>Rule</code>, <code>Scenario</code>, and
+  <code>Examples</code> elements do not exceed a configurable maximum number of tags.
+  Excessive tags on a single element suggest poor test organization or over-classification
+  and make test reports harder to filter effectively.
+</p>
+<p>
+  The default limit is 8 tags per element. Teams can adjust this threshold based on
+  their tagging conventions.
+</p>
+<h2>Noncompliant Code Example</h2>
+<p>With <code>maxTags</code> set to <code>5</code>:</p>
+<pre>
+@smoke @regression @integration @ui @api @nightly  <!-- Noncompliant -->
+Scenario: User logs in
+  Given a registered user
+  When the user logs in
+  Then the dashboard is displayed
+</pre>
+<h2>Compliant Solution</h2>
+<pre>
+@smoke @regression @ui
+Scenario: User logs in
+  Given a registered user
+  When the user logs in
+  Then the dashboard is displayed
+</pre>
+<h2>Configuration</h2>
+<table>
+  <tr>
+    <th>Parameter</th>
+    <th>Description</th>
+    <th>Default</th>
+  </tr>
+  <tr>
+    <td><code>maxTags</code></td>
+    <td>Maximum number of tags allowed per element (Feature, Rule, Scenario, or Examples).</td>
+    <td><code>8</code></td>
+  </tr>
+</table>
+<h2>See Also</h2>
+<ul>
+  <li><code>no-duplicate-tags</code> — removes duplicate tags that inflate tag counts.</li>
+  <li><code>no-redundant-tags</code> — removes tags that are redundant due to inheritance.</li>
+  <li><code>tag-name-pattern</code> — enforces consistent tag naming conventions.</li>
+</ul>

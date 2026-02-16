@@ -1,0 +1,44 @@
+<p>
+  A <code>Scenario Outline</code> (or <code>Scenario Template</code>) is designed to be
+  parameterized via an <code>Examples</code> table. Without at least one <code>Examples</code>
+  section, the outline produces zero test iterations at runtime — the steps are never executed.
+  This is always a defect: either the <code>Examples</code> table was accidentally omitted,
+  or the scenario should be written as a plain <code>Scenario</code>.
+</p>
+<p>
+  This rule uses language-aware keyword matching to correctly detect Scenario Outline keywords
+  in all supported Gherkin languages (e.g., German <code>Szenariogrundriss</code>, French
+  <code>Plan du Scénario</code>).
+</p>
+
+<h2>Noncompliant Code Example</h2>
+<pre>
+Feature: User registration
+
+  Scenario Outline: Register with valid data  <!-- Noncompliant — missing Examples -->
+    Given the user fills in the registration form
+    When the user submits the form
+    Then the account is created
+</pre>
+
+<h2>Compliant Solution</h2>
+<pre>
+Feature: User registration
+
+  Scenario Outline: Register with &lt;role&gt; role
+    Given the user fills in the registration form as &lt;role&gt;
+    When the user submits the form
+    Then the account is created with role &lt;role&gt;
+
+    Examples:
+      | role    |
+      | admin   |
+      | editor  |
+      | viewer  |
+</pre>
+
+<h2>See Also</h2>
+<ul>
+  <li><code>outline-placeholder-required</code> — ensures Scenario Outlines actually reference placeholders.</li>
+  <li><code>use-scenario-outline-for-examples</code> — ensures Examples appear only in Scenario Outlines.</li>
+</ul>

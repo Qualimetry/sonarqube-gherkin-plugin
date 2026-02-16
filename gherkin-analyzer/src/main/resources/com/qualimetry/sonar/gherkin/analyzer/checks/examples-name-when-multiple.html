@@ -1,0 +1,53 @@
+<p>When a <code>Scenario Outline</code> has multiple <code>Examples</code> sections,
+each section should have a descriptive name. Unnamed <code>Examples</code> tables
+become indistinguishable in test reports, making failures harder to diagnose.</p>
+
+<p>This rule only triggers when there are two or more <code>Examples</code> sections
+within a single <code>Scenario Outline</code>. A single <code>Examples</code> section
+does not need a name because there is no ambiguity.</p>
+
+<h2>Noncompliant Code Example</h2>
+<pre>
+Feature: User login
+
+  Scenario Outline: Login with credentials
+    Given a user with username "&lt;username&gt;"
+    When they enter password "&lt;password&gt;"
+    Then they should see "&lt;result&gt;"
+
+    Examples:                                    <!-- Noncompliant -->
+      | username | password  | result  |
+      | admin    | secret123 | Welcome |
+      | user1    | pass456   | Welcome |
+
+    Examples:                                    <!-- Noncompliant -->
+      | username | password | result         |
+      | admin    | wrong    | Invalid        |
+      | unknown  | any      | User not found |
+</pre>
+
+<h2>Compliant Solution</h2>
+<pre>
+Feature: User login
+
+  Scenario Outline: Login with credentials
+    Given a user with username "&lt;username&gt;"
+    When they enter password "&lt;password&gt;"
+    Then they should see "&lt;result&gt;"
+
+    Examples: Valid credentials
+      | username | password  | result  |
+      | admin    | secret123 | Welcome |
+      | user1    | pass456   | Welcome |
+
+    Examples: Invalid credentials
+      | username | password | result         |
+      | admin    | wrong    | Invalid        |
+      | unknown  | any      | User not found |
+</pre>
+
+<h2>See Also</h2>
+<ul>
+  <li><code>examples-minimum-rows</code> — Ensures Examples tables have sufficient data rows.</li>
+  <li><code>examples-column-coverage</code> — Ensures all Examples columns are used in step placeholders.</li>
+</ul>

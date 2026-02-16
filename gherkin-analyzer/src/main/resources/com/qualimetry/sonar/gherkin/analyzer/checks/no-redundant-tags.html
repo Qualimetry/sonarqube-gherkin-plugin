@@ -1,0 +1,53 @@
+<p>
+  Scenario-level tags should not duplicate tags already set at the Feature level.
+  Tags defined at the Feature level automatically apply to all scenarios within
+  that feature. Repeating them at the scenario level is redundant and should be
+  removed to reduce duplication and improve maintainability.
+</p>
+
+<h2>Noncompliant Code Example</h2>
+<p>Scenario tags that duplicate feature-level tags:</p>
+<pre>
+@smoke @regression
+Feature: User authentication
+
+  @smoke              &lt;!-- Noncompliant; duplicates Feature-level tag --&gt;
+  Scenario: User logs in
+    Given the user navigates to login
+    When the user enters credentials
+    Then the user is authenticated
+
+  @regression         &lt;!-- Noncompliant; duplicates Feature-level tag --&gt;
+  Scenario: User logs out
+    Given the user is authenticated
+    When the user clicks logout
+    Then the user is logged out
+</pre>
+
+<h2>Compliant Solution</h2>
+<p>Remove redundant scenario-level tags:</p>
+<pre>
+@smoke @regression
+Feature: User authentication
+
+  Scenario: User logs in
+    Given the user navigates to login
+    When the user enters credentials
+    Then the user is authenticated
+
+  Scenario: User logs out
+    Given the user is authenticated
+    When the user clicks logout
+    Then the user is logged out
+</pre>
+
+<p>
+  Note: Tags that appear only at the scenario level (not at the Feature level)
+  are allowed and should remain. Rule-level tag redundancy is handled by the
+  companion rule <code>no-redundant-rule-tags</code>.
+</p>
+
+<h2>See Also</h2>
+<ul>
+  <li><code>no-redundant-rule-tags</code> — flags scenario tags duplicating Rule-level tags</li>
+</ul>

@@ -1,0 +1,51 @@
+<p>
+  Each data cell in an Examples table should contain a value. Empty cells
+  usually indicate incomplete test data and can result in placeholder
+  variables being substituted with empty strings. This may cause misleading
+  test results where steps silently pass with blank values instead of
+  testing meaningful data.
+</p>
+
+<h2>Noncompliant Code Example</h2>
+<pre>
+Feature: Product search
+
+  Scenario Outline: Search for products
+    Given the user is on the search page
+    When the user searches for "&lt;product&gt;"
+    Then "&lt;count&gt;" results are displayed
+
+    Examples:                                &lt;!-- Noncompliant --&gt;
+      | product  | count |
+      | laptop   |       |
+      | keyboard | 8     |
+</pre>
+<p>
+  The <code>count</code> cell in the first data row is empty. The
+  <code>&lt;count&gt;</code> placeholder will be substituted with an empty
+  string, which may cause the Then step to match incorrectly.
+</p>
+
+<h2>Compliant Solution</h2>
+<p>Populate all data cells with meaningful values:</p>
+<pre>
+Feature: Product search
+
+  Scenario Outline: Search for products
+    Given the user is on the search page
+    When the user searches for "&lt;product&gt;"
+    Then "&lt;count&gt;" results are displayed
+
+    Examples:
+      | product  | count |
+      | laptop   | 15    |
+      | keyboard | 8     |
+</pre>
+
+<h2>Exceptions</h2>
+<p>
+  This rule is off by default because some teams intentionally test with
+  empty values (e.g., form validation with blank fields). Enable it only
+  when empty cells always indicate incomplete test data in your project.
+  Header row cells are not checked — only data rows (index 1+).
+</p>

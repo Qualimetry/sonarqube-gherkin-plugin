@@ -1,0 +1,47 @@
+<p>
+  Comments that contain Gherkin step keywords (<code>Given</code>,
+  <code>When</code>, <code>Then</code>, <code>And</code>, <code>But</code>,
+  <code>*</code>) indicate dead or abandoned behaviour definitions.
+  Commented-out steps should be removed or restored as active steps to
+  keep feature files clean, accurate, and free of misleading content.
+</p>
+
+<h2>Noncompliant Code Example</h2>
+<pre>
+Feature: Order processing
+
+  Scenario: Process a new order
+    Given a customer has items in the cart
+    When the customer submits the order
+    Then the order is created
+
+  # Given the user is logged in             &lt;!-- Noncompliant --&gt;
+  # When the user clicks the button          &lt;!-- Noncompliant --&gt;
+  # Then the page refreshes                  &lt;!-- Noncompliant --&gt;
+</pre>
+<p>
+  These comment lines start with Gherkin step keywords, indicating they
+  were once active steps that have been commented out rather than properly
+  removed.
+</p>
+
+<h2>Compliant Solution</h2>
+<p>Remove the commented-out steps entirely, or restore them if needed:</p>
+<pre>
+Feature: Order processing
+
+  Scenario: Process a new order
+    Given a customer has items in the cart
+    When the customer submits the order
+    Then the order is created
+</pre>
+
+<h2>Exceptions</h2>
+<p>
+  This rule is off by default because some comments legitimately mention
+  step keywords in explanatory text (e.g.,
+  <code># Note: the Given step above establishes the session</code>).
+  Teams that enable this rule accept the trade-off of occasional false
+  positives on such comments. The <code># language:</code> declaration
+  is always excluded.
+</p>
