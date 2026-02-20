@@ -1,0 +1,39 @@
+<p>
+  <code>When</code> steps should match the configured regular-expression
+  pattern. This rule lets teams enforce naming conventions on action steps
+  &mdash; for example, requiring them to start with a noun phrase
+  such as &ldquo;the&rdquo; or &ldquo;a&rdquo;.
+</p>
+
+<h2>Noncompliant Code Example</h2>
+<p>With the pattern <code>^the .*</code>:</p>
+<pre>
+Feature: Account management
+
+  Scenario: Deactivate an account
+    Given the user has an active account
+    When account is deactivated                       &lt;!-- Noncompliant --&gt;
+    Then the account status is inactive
+</pre>
+
+<h2>Compliant Solution</h2>
+<pre>
+Feature: Account management
+
+  Scenario: Deactivate an account
+    Given the user has an active account
+    When the account is deactivated
+    Then the account status is inactive
+</pre>
+
+<h2>Parameters</h2>
+<table>
+  <thead><tr><th>Name</th><th>Default</th><th>Description</th></tr></thead>
+  <tbody>
+    <tr>
+      <td><code>pattern</code></td>
+      <td><code>.*</code></td>
+      <td>Regular expression that When step text must match.</td>
+    </tr>
+  </tbody>
+</table>

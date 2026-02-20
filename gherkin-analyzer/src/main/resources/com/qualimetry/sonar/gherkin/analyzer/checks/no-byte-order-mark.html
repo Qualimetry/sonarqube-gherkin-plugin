@@ -1,0 +1,38 @@
+<p>
+  Gherkin files encoded in UTF-8 should not begin with a Byte Order Mark (BOM).
+  The UTF-8 BOM is the three-byte sequence <code>EF BB BF</code> (Unicode
+  character <code>U+FEFF</code>) placed at the start of a file. While some
+  Windows editors insert this marker automatically, it is unnecessary for UTF-8
+  and can cause problems with parsers, build tools, and version control systems
+  that do not expect it.
+</p>
+
+<h2>Noncompliant Code Example</h2>
+<p>File begins with a BOM (shown as <code>[BOM]</code>):</p>
+<pre>
+[BOM]Feature: Warehouse inventory                    &lt;!-- Noncompliant --&gt;
+
+  Scenario: Receive new stock
+    Given a shipment of 100 units arrives
+    When the warehouse clerk scans the items
+    Then the inventory count increases by 100
+</pre>
+
+<h2>Compliant Solution</h2>
+<p>File starts directly with the Feature keyword, no BOM present:</p>
+<pre>
+Feature: Warehouse inventory
+
+  Scenario: Receive new stock
+    Given a shipment of 100 units arrives
+    When the warehouse clerk scans the items
+    Then the inventory count increases by 100
+</pre>
+
+<h2>Notes</h2>
+<p>
+  To remove a BOM, open the file in an editor that supports encoding changes
+  and re-save it as "UTF-8 without BOM". In VS Code this can be done via the
+  encoding selector in the status bar. This is reported as a file-level issue
+  on line 1.
+</p>

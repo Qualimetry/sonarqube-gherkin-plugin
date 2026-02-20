@@ -1,0 +1,6 @@
+projectKey=gherkin-its-compliant
+serverUrl=https://acme.qualimetry.io/uat/sonar
+serverVersion=2025.6.1.117629
+dashboardUrl=https://acme.qualimetry.io/uat/sonar/dashboard?id=gherkin-its-compliant
+ceTaskId=8181cf0e-e5b1-4538-8c95-b44561c65521
+ceTaskUrl=https://acme.qualimetry.io/uat/sonar/api/ce/task?id=8181cf0e-e5b1-4538-8c95-b44561c65521

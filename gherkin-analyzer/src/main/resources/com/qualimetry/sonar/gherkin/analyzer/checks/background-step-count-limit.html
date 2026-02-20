@@ -1,0 +1,52 @@
+<p>
+  Background sections should not exceed a configurable number of steps
+  (default: 5). Every scenario in scope implicitly begins with the
+  Background steps, so a long Background makes scenarios harder to
+  understand, increases the cognitive load on readers and reviewers,
+  and often indicates that setup logic should be consolidated or
+  extracted into helper steps.
+</p>
+
+<h2>Noncompliant Code Example</h2>
+<p>With the default limit of 5 steps:</p>
+<pre>
+Feature: Complex setup
+
+  Background:                                &lt;!-- Noncompliant --&gt;
+    Given a registered user
+    And the user is logged in
+    And the user has a verified email
+    And the user has a premium subscription
+    And the user has enabled two-factor authentication
+    And the user has accepted the latest terms
+    And the user is on the home page
+
+  Scenario: View settings
+    When the user navigates to settings
+    Then the settings page is displayed
+</pre>
+
+<h2>Compliant Solution</h2>
+<p>Reduce the Background to essential shared setup:</p>
+<pre>
+Feature: Complex setup
+
+  Background:
+    Given a registered user with full profile
+    And the user is logged in
+
+  Scenario: View settings
+    When the user navigates to settings
+    Then the settings page is displayed
+</pre>
+
+<h2>Configuration</h2>
+<p>
+  The <code>maxSteps</code> parameter controls the maximum number of
+  steps allowed per Background. The default value is <strong>5</strong>.
+  Teams with complex shared setup can raise the limit.
+</p>
+<table>
+  <tr><th>Parameter</th><th>Type</th><th>Default</th></tr>
+  <tr><td><code>maxSteps</code></td><td>int</td><td>5</td></tr>
+</table>

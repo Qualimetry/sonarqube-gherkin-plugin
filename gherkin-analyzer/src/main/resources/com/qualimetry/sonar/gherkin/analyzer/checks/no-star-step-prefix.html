@@ -1,0 +1,49 @@
+<p>
+  Steps should not use the <code>*</code> (asterisk) keyword prefix. While
+  the asterisk is valid Gherkin syntax and acts as a wildcard step keyword,
+  it obscures the intent of the step. Using explicit keywords like
+  <code>Given</code>, <code>When</code>, <code>Then</code>, <code>And</code>,
+  or <code>But</code> makes each step's purpose immediately clear to readers.
+</p>
+
+<p>
+  <strong>Note:</strong> The <code>*</code> prefix is explicitly endorsed by
+  the Gherkin specification as valid syntax for bullet-point-style steps.
+  This rule is an <em>opinionated style preference</em>, not a correctness
+  check. Teams that use <code>*</code> steps intentionally (e.g., for
+  free-form step lists) can safely deactivate this rule. This rule is not
+  active in the default quality profile.
+</p>
+
+<h2>Noncompliant Code Example</h2>
+<pre>
+Feature: Order management
+
+  Scenario: Place an order
+    Given the customer has an active account
+    * the customer has items in the cart              &lt;!-- Noncompliant --&gt;
+    When the customer clicks checkout
+    * the customer confirms the order                 &lt;!-- Noncompliant --&gt;
+    Then the order is placed successfully
+</pre>
+
+<h2>Compliant Solution</h2>
+<pre>
+Feature: Order management
+
+  Scenario: Place an order
+    Given the customer has an active account
+    And the customer has items in the cart
+    When the customer clicks checkout
+    And the customer confirms the order
+    Then the order is placed successfully
+</pre>
+
+<h2>See Also</h2>
+<p>
+  The <code>no-unknown-step-type</code> rule separately flags steps whose
+  semantic type cannot be determined (including <code>*</code> steps that
+  are the first step in a scenario). This rule focuses solely on the
+  literal keyword, while <code>no-unknown-step-type</code> handles the
+  semantic classification concern.
+</p>

@@ -1,0 +1,60 @@
+<p>
+  Gherkin files should use consistent indentation based on the nesting level
+  of each structural element. Consistent indentation improves readability and
+  makes the feature file easier to maintain across teams. Without a uniform
+  indentation style, files become harder to scan visually and merge conflicts
+  are more likely.
+</p>
+
+<p>
+  This rule is language-agnostic and correctly handles non-English Gherkin files
+  as well as <code>Rule</code> block nesting (Gherkin 6+). Tags are checked at
+  the same level as the element they annotate.
+</p>
+
+<h2>Indentation Levels</h2>
+<table>
+  <tr><th>Element</th><th>Level (Feature scope)</th><th>Level (inside Rule)</th></tr>
+  <tr><td>Feature keyword &amp; tags</td><td>0</td><td> - </td></tr>
+  <tr><td>Rule / Background / Scenario keywords &amp; tags</td><td>1</td><td>2</td></tr>
+  <tr><td>Steps / Examples keywords &amp; tags</td><td>2</td><td>3</td></tr>
+</table>
+
+<h2>Noncompliant Code Example</h2>
+<p>With the default indentation of 2 spaces per level:</p>
+<pre>
+Feature: Account registration
+
+Scenario: New customer registers an account          &lt;!-- Noncompliant; expected 2 spaces --&gt;
+      Given the customer navigates to the registration page  &lt;!-- Noncompliant; expected 4 spaces --&gt;
+      When the customer submits valid details
+      Then an account is created
+</pre>
+
+<h2>Compliant Solution</h2>
+<pre>
+@smoke
+Feature: Account registration
+
+  Scenario: New customer registers an account
+    Given the customer navigates to the registration page
+    When the customer submits valid details
+    Then an account is created
+
+  Rule: Business customers
+
+    Scenario: Business customer registers
+      Given the business customer navigates to registration
+      When the customer submits company details
+      Then a business account is created
+</pre>
+
+<h2>Configuration</h2>
+<p>
+  The <code>indentation</code> parameter controls the number of spaces per
+  indentation level. The default value is <strong>2</strong>.
+</p>
+<table>
+  <tr><th>Parameter</th><th>Type</th><th>Default</th></tr>
+  <tr><td><code>indentation</code></td><td>int</td><td>2</td></tr>
+</table>
