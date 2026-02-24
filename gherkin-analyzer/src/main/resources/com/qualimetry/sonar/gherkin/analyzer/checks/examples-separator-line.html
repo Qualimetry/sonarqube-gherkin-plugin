@@ -1,0 +1,44 @@
+<p>
+  An <code>Examples</code> section in a <code>Scenario Outline</code> should be
+  preceded by a blank line. This visual separator makes the feature file easier
+  to read by clearly distinguishing the step definitions from the data table
+  that drives them. Without the blank line, the <code>Examples</code> section
+  blends into the steps, making the structure harder to scan.
+</p>
+
+<h2>Noncompliant Code Example</h2>
+<pre>
+Feature: Currency conversion
+
+  Scenario Outline: Convert between currencies
+    Given the exchange rate from &lt;from&gt; to &lt;to&gt; is &lt;rate&gt;
+    When the customer converts &lt;amount&gt; &lt;from&gt;
+    Then the result is &lt;expected&gt; &lt;to&gt;
+    Examples:                                        &lt;!-- Noncompliant; no blank line before Examples --&gt;
+      | from | to  | rate | amount | expected |
+      | USD  | EUR | 0.85 | 100    | 85       |
+      | GBP  | USD | 1.27 | 200    | 254      |
+</pre>
+
+<h2>Compliant Solution</h2>
+<pre>
+Feature: Currency conversion
+
+  Scenario Outline: Convert between currencies
+    Given the exchange rate from &lt;from&gt; to &lt;to&gt; is &lt;rate&gt;
+    When the customer converts &lt;amount&gt; &lt;from&gt;
+    Then the result is &lt;expected&gt; &lt;to&gt;
+
+    Examples:
+      | from | to  | rate | amount | expected |
+      | USD  | EUR | 0.85 | 100    | 85       |
+      | GBP  | USD | 1.27 | 200    | 254      |
+</pre>
+
+<h2>Notes</h2>
+<p>
+  This rule applies to every <code>Examples</code> section within a
+  <code>Scenario Outline</code>. If a <code>Scenario Outline</code> has
+  multiple <code>Examples</code> blocks, each one should be preceded by
+  a blank line.
+</p>

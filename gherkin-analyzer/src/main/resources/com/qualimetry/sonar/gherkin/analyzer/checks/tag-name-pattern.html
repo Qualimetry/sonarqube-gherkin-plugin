@@ -1,0 +1,38 @@
+<p>
+  Tag names should follow a consistent naming convention. By default, tag names
+  must start with a lowercase letter and contain only lowercase letters, digits,
+  and hyphens. A consistent naming convention makes tags easier to read, avoids
+  confusion, and improves maintainability across large test suites.
+</p>
+
+<h2>Noncompliant Code Example</h2>
+<p>Tag names that violate the default pattern:</p>
+<pre>
+@SmokeTest              &lt;!-- Noncompliant; starts with uppercase --&gt;
+@regression_test        &lt;!-- Noncompliant; contains underscore --&gt;
+@123-priority           &lt;!-- Noncompliant; starts with digit --&gt;
+@payment-processing     &lt;!-- Compliant --&gt;
+</pre>
+
+<h2>Compliant Solution</h2>
+<pre>
+@smoke
+@regression
+@priority-high
+@payment-processing
+@api-test
+</pre>
+
+<h2>Configuration</h2>
+<p>
+  The <code>pattern</code> parameter is a regular expression that tag names
+  must match. The default pattern is <code>^[a-z][-a-z0-9]*$</code>.
+</p>
+<table>
+  <tr><th>Parameter</th><th>Type</th><th>Default</th></tr>
+  <tr>
+    <td><code>pattern</code></td>
+    <td>String (regex)</td>
+    <td><code>^[a-z][-a-z0-9]*$</code></td>
+  </tr>
+</table>

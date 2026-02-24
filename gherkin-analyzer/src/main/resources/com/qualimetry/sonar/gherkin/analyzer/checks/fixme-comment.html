@@ -1,0 +1,28 @@
+<p>
+  Comments containing <code>FIXME</code> markers should be resolved and
+  removed. FIXME comments indicate known defects or issues that are
+  better tracked in an issue tracker. Leaving them in feature files
+  risks them being overlooked as the test suite grows.
+</p>
+
+<h2>Noncompliant Code Example</h2>
+<pre>
+Feature: Payment processing
+
+  Scenario: Process a credit card payment
+    Given the customer has items in the cart
+    # FIXME: this step fails intermittently            &lt;!-- Noncompliant --&gt;
+    When the customer pays by credit card
+    Then the payment is processed
+</pre>
+
+<h2>Compliant Solution</h2>
+<p>Address the issue and remove the FIXME comment:</p>
+<pre>
+Feature: Payment processing
+
+  Scenario: Process a credit card payment
+    Given the customer has items in the cart
+    When the customer pays by credit card
+    Then the payment is processed
+</pre>

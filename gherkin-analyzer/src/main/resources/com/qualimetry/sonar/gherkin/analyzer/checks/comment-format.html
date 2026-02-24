@@ -1,0 +1,37 @@
+<p>
+  Comments in Gherkin files should have a space after the <code>#</code> symbol.
+  This improves readability and follows the widely adopted convention in most
+  programming languages and configuration files. An empty comment consisting
+  of just <code>#</code> is also acceptable.
+</p>
+
+<h2>Noncompliant Code Example</h2>
+<pre>
+Feature: Delivery scheduling
+
+  #This comment does not have a space after #       &lt;!-- Noncompliant --&gt;
+  Scenario: Schedule a delivery
+    Given the customer has placed an order
+    #Another badly formatted comment                &lt;!-- Noncompliant --&gt;
+    When the customer selects next-day delivery
+    Then the delivery is scheduled for tomorrow
+</pre>
+
+<h2>Compliant Solution</h2>
+<pre>
+Feature: Delivery scheduling
+
+  # This comment has a space after #
+  Scenario: Schedule a delivery
+    Given the customer has placed an order
+    # A properly formatted comment
+    When the customer selects next-day delivery
+    Then the delivery is scheduled for tomorrow
+</pre>
+
+<h2>Notes</h2>
+<p>
+  This rule allows empty comments (just a bare <code>#</code>) which are
+  sometimes used as visual separators. The format <code># comment text</code>
+  is the expected convention.
+</p>

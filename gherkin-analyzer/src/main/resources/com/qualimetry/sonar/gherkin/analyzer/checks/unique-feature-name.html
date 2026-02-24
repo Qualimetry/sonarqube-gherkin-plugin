@@ -1,0 +1,37 @@
+<p>
+  <code>Feature</code> names must be unique across all <code>.feature</code>
+  files in the project. Duplicate Feature names create ambiguity in test
+  reports and make it impossible to distinguish which file a particular
+  test result originates from. Each Feature should have a distinct,
+  descriptive name that clearly identifies its business domain.
+</p>
+
+<h2>Noncompliant Code Example</h2>
+<p>In <code>login.feature</code>:</p>
+<pre>
+Feature: User authentication
+  Scenario: Login with valid credentials
+    ...
+</pre>
+<p>In <code>sso.feature</code>:</p>
+<pre>
+Feature: User authentication                    &lt;!-- Noncompliant: duplicate name --&gt;
+  Scenario: Login via SSO provider
+    ...
+</pre>
+
+<h2>Compliant Solution</h2>
+<p>Give each Feature a unique name:</p>
+<pre>
+Feature: Password-based authentication
+  ...
+
+Feature: Single sign-on authentication
+  ...
+</pre>
+
+<h2>See Also</h2>
+<ul>
+  <li><code>feature-name-required</code> &mdash; Features must have a non-empty name</li>
+  <li><code>unique-scenario-name</code> &mdash; Scenario names must also be unique</li>
+</ul>

@@ -1,0 +1,51 @@
+<p>
+  Scenarios should not exceed a configurable number of steps. A scenario
+  with too many steps is usually testing multiple behaviours at once and
+  is difficult to read, maintain, and debug when it fails. Long scenarios
+  should be split into multiple focused scenarios, each testing a single
+  business outcome.
+</p>
+
+<h2>Noncompliant Code Example</h2>
+<p>With the default limit of 12 steps:</p>
+<pre>
+Feature: Loan application
+
+  Scenario: Complete loan application process    &lt;!-- Noncompliant --&gt;
+    Given the applicant has a verified identity
+    And the applicant has a credit score above 700
+    And the applicant has a stable income
+    When the applicant selects a loan amount of $50000
+    And the applicant chooses a 5-year term
+    And the applicant provides employment details
+    And the applicant provides residential address
+    And the applicant uploads supporting documents
+    And the applicant reviews the loan summary
+    And the applicant accepts the terms and conditions
+    Then the application is submitted for review
+    And the applicant receives a confirmation number
+    And the applicant receives an email notification
+</pre>
+
+<h2>Compliant Solution</h2>
+<p>Split into focused scenarios:</p>
+<pre>
+Feature: Loan application
+
+  Scenario: Submit loan application
+    Given the applicant has a verified identity
+    And the applicant has a credit score above 700
+    When the applicant submits a loan application for $50000 over 5 years
+    Then the application is submitted for review
+    And the applicant receives a confirmation number
+</pre>
+
+<h2>Configuration</h2>
+<p>
+  The <code>maxSteps</code> parameter controls the maximum number of
+  steps allowed per Scenario. The default value is <strong>12</strong>.
+</p>
+<table>
+  <tr><th>Parameter</th><th>Type</th><th>Default</th></tr>
+  <tr><td><code>maxSteps</code></td><td>int</td><td>12</td></tr>
+</table>

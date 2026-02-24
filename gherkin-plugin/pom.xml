@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <parent>
+    <groupId>com.qualimetry.sonar</groupId>
+    <artifactId>gherkin-parent</artifactId>
+    <version>1.3.1</version>
+  </parent>
+
+  <artifactId>qualimetry-gherkin-plugin</artifactId>
+  <packaging>sonar-plugin</packaging>
+
+  <name>Gherkin Analyzer - SonarQube Plugin</name>
+  <description>SonarQube plugin entry point, sensor, language registration, and quality profile for Gherkin analysis</description>
+
+  <dependencies>
+    <!-- Internal: analysis engine -->
+    <dependency>
+      <groupId>com.qualimetry.sonar</groupId>
+      <artifactId>gherkin-analyzer</artifactId>
+      <version>${project.version}</version>
+    </dependency>
+
+    <!-- SonarQube Plugin API -->
+    <dependency>
+      <groupId>org.sonarsource.api.plugin</groupId>
+      <artifactId>sonar-plugin-api</artifactId>
+      <scope>provided</scope>
+    </dependency>
+
+    <!-- Provided by SonarQube; LanguageTool (spelling-accuracy) pulls it in transitively -->
+    <dependency>
+      <groupId>commons-logging</groupId>
+      <artifactId>commons-logging</artifactId>
+      <version>1.2</version>
+      <scope>provided</scope>
+    </dependency>
+
+    <!-- Test dependencies -->
+    <dependency>
+      <groupId>org.junit.jupiter</groupId>
+      <artifactId>junit-jupiter</artifactId>
+      <scope>test</scope>
+    </dependency>
+
+    <dependency>
+      <groupId>org.assertj</groupId>
+      <artifactId>assertj-core</artifactId>
+      <scope>test</scope>
+    </dependency>
+
+    <dependency>
+      <groupId>org.mockito</groupId>
+      <artifactId>mockito-core</artifactId>
+      <scope>test</scope>
+    </dependency>
+
+    <dependency>
+      <groupId>org.sonarsource.sonarqube</groupId>
+      <artifactId>sonar-testing-harness</artifactId>
+      <scope>test</scope>
+    </dependency>
+  </dependencies>
+
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.sonarsource.sonar-packaging-maven-plugin</groupId>
+        <artifactId>sonar-packaging-maven-plugin</artifactId>
+        <version>1.23.0.740</version>
+        <extensions>true</extensions>
+        <configuration>
+          <pluginKey>qualimetry-gherkin</pluginKey>
+          <pluginName>Gherkin Analyzer</pluginName>
+          <pluginClass>com.qualimetry.sonar.gherkin.plugin.GherkinAnalyzerPlugin</pluginClass>
+          <requiredForLanguages>gherkin</requiredForLanguages>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
+</project>

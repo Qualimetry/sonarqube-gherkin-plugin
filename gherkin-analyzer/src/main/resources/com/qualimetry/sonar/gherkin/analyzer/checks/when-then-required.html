@@ -1,0 +1,42 @@
+<p>
+  Every <code>Scenario</code> should contain at least one <code>When</code>
+  step and one <code>Then</code> step. The <code>When</code> step describes
+  the action being tested, and the <code>Then</code> step describes the
+  expected outcome. Without both, the scenario is incomplete and does not
+  provide meaningful test coverage.
+</p>
+
+<h2>Noncompliant Code Example</h2>
+<pre>
+Feature: Account management
+
+  Scenario: View account details               &lt;!-- Noncompliant: no When --&gt;
+    Given the customer is logged in
+    Then the account details are displayed
+
+  Scenario: Update account information          &lt;!-- Noncompliant: no Then --&gt;
+    Given the customer is logged in
+    When the customer updates their email address
+</pre>
+
+<h2>Compliant Solution</h2>
+<p>Add the missing steps to complete the scenario:</p>
+<pre>
+Feature: Account management
+
+  Scenario: View account details
+    Given the customer is logged in
+    When the customer navigates to account settings
+    Then the account details are displayed
+
+  Scenario: Update account information
+    Given the customer is logged in
+    When the customer updates their email address
+    Then the email address is changed successfully
+</pre>
+
+<h2>See Also</h2>
+<ul>
+  <li><code>step-required</code> &mdash; Scenarios must contain at least one step</li>
+  <li><code>step-order-given-when-then</code> &mdash; Steps must follow Given/When/Then order</li>
+</ul>

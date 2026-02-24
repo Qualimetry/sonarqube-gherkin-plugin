@@ -1,0 +1,43 @@
+<p>
+  Comments matching a configurable regular-expression pattern are flagged.
+  This is a template rule: by default no pattern is configured and the rule
+  does nothing. Once a pattern is provided, any comment whose text matches
+  the pattern is reported. Use this rule to ban specific comment styles or
+  markers that are not covered by the built-in TODO/FIXME checks.
+</p>
+
+<h2>Noncompliant Code Example</h2>
+<p>With the pattern <code>(?i)hack</code>:</p>
+<pre>
+Feature: Payment processing
+
+  Scenario: Process a refund
+    Given the customer has a completed order
+    # HACK: workaround for the payment gateway          &lt;!-- Noncompliant --&gt;
+    When the customer requests a refund
+    Then the refund is processed
+</pre>
+
+<h2>Compliant Solution</h2>
+<p>Remove or rephrase the offending comment:</p>
+<pre>
+Feature: Payment processing
+
+  Scenario: Process a refund
+    Given the customer has a completed order
+    When the customer requests a refund
+    Then the refund is processed
+</pre>
+
+<h2>Parameters</h2>
+<table>
+  <thead><tr><th>Name</th><th>Default</th><th>Description</th></tr></thead>
+  <tbody>
+    <tr>
+      <td><code>pattern</code></td>
+      <td><em>(empty)</em></td>
+      <td>Regular expression pattern to match against comment text.
+          Leave empty to disable the rule.</td>
+    </tr>
+  </tbody>
+</table>

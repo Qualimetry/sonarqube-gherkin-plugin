@@ -1,0 +1,59 @@
+<p>The same tag should not appear more than once on a single element.
+Duplicate tags on the same <code>Feature</code>, <code>Rule</code>,
+<code>Scenario</code>, or <code>Examples</code> section are always redundant
+and indicate a copy-paste error or oversight.</p>
+
+<p>This check is different from <code>no-redundant-tags</code>, which detects
+tags that duplicate inherited tags from a parent element. This rule catches
+exact duplicate tags within the same element's own tag list.</p>
+
+<h2>Noncompliant Code Example</h2>
+<pre>
+@smoke @regression @smoke                        <!-- Noncompliant: @smoke duplicated on Feature -->
+Feature: User login
+
+  @critical @critical                             <!-- Noncompliant: @critical duplicated on Scenario -->
+  Scenario: Successful login
+    Given a valid user
+    When they enter credentials
+    Then they are logged in
+
+  Scenario Outline: Login with various roles
+    Given a user with role "&lt;role&gt;"
+    When they log in
+    Then they see "&lt;page&gt;"
+
+    @fast @fast                                   <!-- Noncompliant: @fast duplicated on Examples -->
+    Examples: Roles
+      | role  | page      |
+      | admin | dashboard |
+</pre>
+
+<h2>Compliant Solution</h2>
+<pre>
+@smoke @regression
+Feature: User login
+
+  @critical
+  Scenario: Successful login
+    Given a valid user
+    When they enter credentials
+    Then they are logged in
+
+  Scenario Outline: Login with various roles
+    Given a user with role "&lt;role&gt;"
+    When they log in
+    Then they see "&lt;page&gt;"
+
+    @fast
+    Examples: Roles
+      | role  | page      |
+      | admin | dashboard |
+</pre>
+
+<h2>See Also</h2>
+<ul>
+  <li><code>no-redundant-tags</code> - Flags scenario tags that duplicate Feature-level tags.</li>
+  <li><code>no-redundant-rule-tags</code> - Flags scenario tags that duplicate Rule-level tags.</li>
+  <li><code>tag-name-pattern</code> - Enforces tag naming conventions.</li>
+</ul>

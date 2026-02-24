@@ -1,0 +1,44 @@
+<p>
+  Steps within a scenario or background must not be duplicated. Duplicate
+  steps add no value and make scenarios harder to read and maintain. If
+  the same step appears multiple times consecutively, it should be removed.
+  If steps are repeated with different contexts, they may need to be
+  consolidated or the scenario may need to be restructured.
+</p>
+
+<h2>Noncompliant Code Example</h2>
+<pre>
+Feature: Shopping cart management
+
+  Scenario: Add multiple items
+    Given the customer is logged in
+    When the customer adds "Laptop" to the cart
+    When the customer adds "Laptop" to the cart    &lt;!-- Noncompliant: duplicate --&gt;
+    Then the cart contains 2 items
+
+  Background:                                     &lt;!-- Noncompliant: duplicate in Background --&gt;
+    Given the customer is logged in
+    Given the customer is logged in
+    And the product catalog is available
+</pre>
+
+<h2>Compliant Solution</h2>
+<p>Remove duplicate steps or consolidate them appropriately:</p>
+<pre>
+Feature: Shopping cart management
+
+  Background:
+    Given the customer is logged in
+    And the product catalog is available
+
+  Scenario: Add multiple items
+    When the customer adds "Laptop" to the cart
+    And the customer adds another "Laptop" to the cart
+    Then the cart contains 2 items
+</pre>
+
+<h2>See Also</h2>
+<ul>
+  <li><code>shared-given-to-background</code> &mdash; Common Given steps should be moved to Background</li>
+  <li><code>step-count-limit</code> &mdash; Scenarios should not exceed a maximum number of steps</li>
+</ul>

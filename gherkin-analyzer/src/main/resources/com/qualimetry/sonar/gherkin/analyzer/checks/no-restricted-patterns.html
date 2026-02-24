@@ -1,0 +1,51 @@
+<p>
+  Flags step text, scenario names, feature names, rule names, and descriptions
+  that match a configurable regular expression. This is a template rule - when
+  the pattern is empty (the default), the rule does nothing.
+</p>
+<p>
+  More general than <code>business-language-only</code>, this rule lets teams ban
+  project-specific anti-patterns such as hardcoded URLs, environment names,
+  SQL fragments, implementation details, or any other text that should not appear
+  in Gherkin specifications.
+</p>
+<h2>Noncompliant Code Example</h2>
+<p>With <code>pattern</code> set to <code>https?://|SELECT\s|INSERT\s</code>:</p>
+<pre>
+Feature: User data retrieval
+
+  Scenario: Fetch user data  <!-- Noncompliant - step contains URL -->
+    Given the API at "https://api.example.com/users"
+    When the client sends a GET request
+    Then the response status is 200
+</pre>
+<h2>Compliant Solution</h2>
+<pre>
+Feature: User data retrieval
+
+  Scenario: Fetch user data
+    Given the users API endpoint
+    When the client sends a GET request
+    Then the response status is 200
+</pre>
+<h2>Configuration</h2>
+<table>
+  <tr>
+    <th>Parameter</th>
+    <th>Description</th>
+    <th>Default</th>
+  </tr>
+  <tr>
+    <td><code>pattern</code></td>
+    <td>
+      Regular expression to match against step text, names, and descriptions.
+      Uses <code>find()</code> semantics (partial match). Leave empty to disable the rule.
+    </td>
+    <td><em>(empty - rule inactive)</em></td>
+  </tr>
+</table>
+<h2>See Also</h2>
+<ul>
+  <li><code>business-language-only</code> - built-in check for common implementation terms.</li>
+  <li><code>no-restricted-tags</code> - restricts specific tag names.</li>
+</ul>
