@@ -1,0 +1,74 @@
+<p>
+  Given steps that are repeated across all scenarios in a container (Feature or
+  Rule) should be moved to the Background section of that container. This reduces
+  duplication, improves maintainability, and makes it clear which preconditions
+  are shared. The analysis is scoped independently per container: Feature-level
+  scenarios are checked against the Feature-level Background, and scenarios within
+  a <code>Rule</code> block are checked against the Rule-level Background.
+</p>
+
+<h2>Noncompliant Code Example</h2>
+<pre>
+Feature: Online shopping cart
+
+  Scenario: Add item to cart
+    Given the customer is logged in
+    And the product catalog is available
+    When the customer adds "Laptop" to the cart
+    Then the cart contains 1 item
+
+  Scenario: Remove item from cart
+    Given the customer is logged in
+    And the product catalog is available
+    When the customer removes "Laptop" from the cart
+    Then the cart is empty
+
+  Rule: Bulk orders                     &lt;!-- Noncompliant within this Rule --&gt;
+
+    Scenario: Add bulk items
+      Given the customer is a wholesale buyer
+      When the customer adds 100 units
+      Then the cart contains 100 items
+
+    Scenario: Apply bulk discount
+      Given the customer is a wholesale buyer
+      When the system calculates the total
+      Then a bulk discount is applied
+</pre>
+
+<h2>Compliant Solution</h2>
+<p>Extract common Given steps to Background at each scope:</p>
+<pre>
+Feature: Online shopping cart
+
+  Background:
+    Given the customer is logged in
+    And the product catalog is available
+
+  Scenario: Add item to cart
+    When the customer adds "Laptop" to the cart
+    Then the cart contains 1 item
+
+  Scenario: Remove item from cart
+    When the customer removes "Laptop" from the cart
+    Then the cart is empty
+
+  Rule: Bulk orders
+
+    Background:
+      Given the customer is a wholesale buyer
+
+    Scenario: Add bulk items
+      When the customer adds 100 units
+      Then the cart contains 100 items
+
+    Scenario: Apply bulk discount
+      When the system calculates the total
+      Then a bulk discount is applied
+</pre>
+
+<h2>See Also</h2>
+<ul>
+  <li><code>background-given-only</code> &mdash; Background sections must only contain Given steps</li>
+  <li><code>no-duplicate-steps</code> &mdash; Steps within a scenario must not be duplicated</li>
+</ul>

@@ -1,0 +1,45 @@
+<p>
+  <code>Examples</code> tables must include columns for all variables
+  referenced in the <code>Scenario Outline</code> steps. When a step
+  references a placeholder like <code>&lt;username&gt;</code> but the
+  Examples table does not define a corresponding column, the placeholder
+  will not be substituted during test execution, leading to incorrect
+  or misleading test results.
+</p>
+
+<h2>Noncompliant Code Example</h2>
+<pre>
+Feature: User authentication
+
+  Scenario Outline: Login with different credentials
+    Given the user &lt;username&gt; exists in the system
+    When the user logs in with password &lt;password&gt;
+    Then the login attempt should be &lt;result&gt;
+
+    Examples:                                   &lt;!-- Noncompliant: missing "result" column --&gt;
+      | username    | password    |
+      | alice       | Secret123   |
+      | bob         | Pass456     |
+</pre>
+
+<h2>Compliant Solution</h2>
+<p>Add the missing column to the Examples table:</p>
+<pre>
+Feature: User authentication
+
+  Scenario Outline: Login with different credentials
+    Given the user &lt;username&gt; exists in the system
+    When the user logs in with password &lt;password&gt;
+    Then the login attempt should be &lt;result&gt;
+
+    Examples:
+      | username    | password    | result     |
+      | alice       | Secret123   | successful |
+      | bob         | Pass456     | successful |
+</pre>
+
+<h2>See Also</h2>
+<ul>
+  <li><code>examples-minimum-rows</code> &mdash; Examples tables must have at least one data row</li>
+  <li><code>no-unused-variables</code> &mdash; Examples columns must be referenced in steps</li>
+</ul>

@@ -1,0 +1,34 @@
+<p>
+  Every <code>Scenario</code> and <code>Scenario Outline</code> must have
+  a non-empty name. Scenario names appear in test reports and are the
+  primary way team members identify which business behaviour is being tested.
+  An unnamed scenario makes test results confusing and hinders debugging
+  when a test fails.
+</p>
+
+<h2>Noncompliant Code Example</h2>
+<pre>
+Feature: Inventory management
+
+  Scenario:                                     &lt;!-- Noncompliant --&gt;
+    Given the warehouse has 50 units of product "Widget A"
+    When 10 units are shipped to the retail store
+    Then the warehouse should have 40 units remaining
+</pre>
+
+<h2>Compliant Solution</h2>
+<p>Provide a descriptive name that explains the business behaviour:</p>
+<pre>
+Feature: Inventory management
+
+  Scenario: Shipping reduces warehouse stock
+    Given the warehouse has 50 units of product "Widget A"
+    When 10 units are shipped to the retail store
+    Then the warehouse should have 40 units remaining
+</pre>
+
+<h2>See Also</h2>
+<ul>
+  <li><code>feature-name-required</code> &mdash; Features must also have a non-empty name</li>
+  <li><code>unique-scenario-name</code> &mdash; Scenario names must be unique</li>
+</ul>

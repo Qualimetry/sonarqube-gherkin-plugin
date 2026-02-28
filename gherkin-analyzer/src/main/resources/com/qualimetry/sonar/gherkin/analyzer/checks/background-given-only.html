@@ -1,0 +1,44 @@
+<p>
+  Background sections must only contain <code>Given</code> steps. The Background
+  is designed to establish shared preconditions that apply to all scenarios in
+  a feature. Using <code>When</code> or <code>Then</code> steps in Background
+  violates the Given-When-Then pattern and makes scenarios harder to understand,
+  as Background should only set up the initial state, not perform actions or
+  verify outcomes.
+</p>
+
+<h2>Noncompliant Code Example</h2>
+<pre>
+Feature: Customer account management
+
+  Background:                                    &lt;!-- Noncompliant --&gt;
+    Given the customer has an active account
+    When the customer logs into the system
+    Then the customer dashboard is displayed
+
+  Scenario: View account balance
+    Given the account balance is $1000
+    When the customer requests the balance
+    Then the balance of $1000 is displayed
+</pre>
+
+<h2>Compliant Solution</h2>
+<p>Move <code>When</code> and <code>Then</code> steps out of Background:</p>
+<pre>
+Feature: Customer account management
+
+  Background:
+    Given the customer has an active account
+    And the customer is logged into the system
+
+  Scenario: View account balance
+    Given the account balance is $1000
+    When the customer requests the balance
+    Then the balance of $1000 is displayed
+</pre>
+
+<h2>See Also</h2>
+<ul>
+  <li><code>shared-given-to-background</code> &mdash; Common Given steps should be moved to Background</li>
+  <li><code>step-order-given-when-then</code> &mdash; Steps must follow Given/When/Then order</li>
+</ul>

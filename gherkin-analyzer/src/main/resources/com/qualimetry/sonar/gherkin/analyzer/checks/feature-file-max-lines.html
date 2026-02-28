@@ -1,0 +1,57 @@
+<p>
+  Checks that feature files do not exceed a configurable line count.
+  Feature files that grow too long become difficult to navigate, review,
+  and maintain. This complements <code>scenario-count-limit</code> by also
+  catching files that are long due to large data tables, doc strings,
+  or verbose descriptions.
+</p>
+<p>
+  The default limit is 300 lines. Teams can adjust this threshold based
+  on their project conventions.
+</p>
+<h2>Noncompliant Code Example</h2>
+<p>With <code>maxLines</code> set to <code>300</code>:</p>
+<pre>
+Feature: Comprehensive order management  <!-- Noncompliant - file exceeds 300 lines -->
+
+  Scenario: Place order
+    Given the user has items in the cart
+    When the user places the order
+    Then the order is confirmed
+
+  ... (many more scenarios, large data tables, doc strings)
+  ... (total file length: 350 lines)
+</pre>
+<h2>Compliant Solution</h2>
+<p>Split the feature file into smaller, focused files:</p>
+<pre>
+# order-placement.feature (120 lines)
+Feature: Order placement
+  ...
+
+# order-cancellation.feature (95 lines)
+Feature: Order cancellation
+  ...
+
+# order-tracking.feature (80 lines)
+Feature: Order tracking
+  ...
+</pre>
+<h2>Configuration</h2>
+<table>
+  <tr>
+    <th>Parameter</th>
+    <th>Description</th>
+    <th>Default</th>
+  </tr>
+  <tr>
+    <td><code>maxLines</code></td>
+    <td>Maximum number of lines allowed in a single feature file.</td>
+    <td><code>300</code></td>
+  </tr>
+</table>
+<h2>See Also</h2>
+<ul>
+  <li><code>scenario-count-limit</code> - limits the number of scenarios per feature.</li>
+  <li><code>step-count-limit</code> - limits the number of steps per scenario.</li>
+</ul>
