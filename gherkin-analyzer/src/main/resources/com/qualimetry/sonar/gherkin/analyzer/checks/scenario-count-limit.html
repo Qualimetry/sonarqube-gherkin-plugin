@@ -1,0 +1,62 @@
+<p>
+  Features should not exceed a configurable number of scenarios. A feature
+  file with too many scenarios becomes difficult to navigate, understand,
+  and maintain. Large features often indicate that the file covers multiple
+  business capabilities that should be split into separate, more focused
+  feature files.
+</p>
+
+<h2>Noncompliant Code Example</h2>
+<p>With the default limit of 12 scenarios:</p>
+<pre>
+Feature: Complete e-commerce workflow            &lt;!-- Noncompliant --&gt;
+
+  Scenario: Browse product catalog
+    ...
+  Scenario: Search for a product
+    ...
+  Scenario: View product details
+    ...
+  Scenario: Add product to cart
+    ...
+  Scenario: Update cart quantity
+    ...
+  Scenario: Remove product from cart
+    ...
+  Scenario: Apply discount code
+    ...
+  Scenario: Calculate shipping cost
+    ...
+  Scenario: Select payment method
+    ...
+  Scenario: Process credit card payment
+    ...
+  Scenario: Process bank transfer
+    ...
+  Scenario: Confirm order
+    ...
+  Scenario: Cancel order
+    ...
+</pre>
+
+<h2>Compliant Solution</h2>
+<p>Split the feature into smaller, domain-specific features:</p>
+<pre>
+Feature: Product browsing
+  Scenario: Browse product catalog
+    ...
+  Scenario: Search for a product
+    ...
+  Scenario: View product details
+    ...
+</pre>
+
+<h2>Configuration</h2>
+<p>
+  The <code>maxScenarios</code> parameter controls the maximum number of
+  scenarios allowed in a single Feature. The default value is <strong>12</strong>.
+</p>
+<table>
+  <tr><th>Parameter</th><th>Type</th><th>Default</th></tr>
+  <tr><td><code>maxScenarios</code></td><td>int</td><td>12</td></tr>
+</table>

@@ -1,0 +1,42 @@
+<p>
+  <code>Examples</code> tables in a <code>Scenario Outline</code> must
+  contain at least one data row beyond the header row. An Examples table
+  with only a header provides no test data, rendering the Scenario Outline
+  useless. The header row defines the column names; data rows provide the
+  actual values that are substituted into the outline steps.
+</p>
+
+<h2>Noncompliant Code Example</h2>
+<pre>
+Feature: Currency conversion
+
+  Scenario Outline: Convert between currencies
+    Given the exchange rate from &lt;source&gt; to &lt;target&gt; is &lt;rate&gt;
+    When the customer converts &lt;amount&gt; &lt;source&gt;
+    Then the result should be &lt;expected&gt; &lt;target&gt;
+
+    Examples:                                   &lt;!-- Noncompliant --&gt;
+      | source | target | rate | amount | expected |
+</pre>
+
+<h2>Compliant Solution</h2>
+<p>Add at least one data row to the Examples table:</p>
+<pre>
+Feature: Currency conversion
+
+  Scenario Outline: Convert between currencies
+    Given the exchange rate from &lt;source&gt; to &lt;target&gt; is &lt;rate&gt;
+    When the customer converts &lt;amount&gt; &lt;source&gt;
+    Then the result should be &lt;expected&gt; &lt;target&gt;
+
+    Examples:
+      | source | target | rate  | amount | expected |
+      | USD    | EUR    | 0.85  | 100    | 85       |
+      | GBP    | USD    | 1.27  | 50     | 63.50    |
+</pre>
+
+<h2>See Also</h2>
+<ul>
+  <li><code>examples-column-coverage</code> &mdash; Examples tables must include columns for all referenced variables</li>
+  <li><code>use-scenario-outline-for-examples</code> &mdash; Examples require Scenario Outline</li>
+</ul>

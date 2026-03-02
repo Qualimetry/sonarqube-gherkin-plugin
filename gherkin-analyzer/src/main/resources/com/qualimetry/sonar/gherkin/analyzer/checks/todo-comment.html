@@ -1,0 +1,28 @@
+<p>
+  Comments containing <code>TODO</code> markers should be resolved and
+  removed. TODO comments indicate unfinished work or pending decisions
+  that are better tracked in an issue tracker. Leaving them in feature
+  files risks them being overlooked as the test suite grows.
+</p>
+
+<h2>Noncompliant Code Example</h2>
+<pre>
+Feature: Payment processing
+
+  Scenario: Process a credit card payment
+    Given the customer has items in the cart
+    # TODO: implement this step                        &lt;!-- Noncompliant --&gt;
+    When the customer pays by credit card
+    Then the payment is processed
+</pre>
+
+<h2>Compliant Solution</h2>
+<p>Remove or resolve the TODO comment:</p>
+<pre>
+Feature: Payment processing
+
+  Scenario: Process a credit card payment
+    Given the customer has items in the cart
+    When the customer pays by credit card
+    Then the payment is processed
+</pre>

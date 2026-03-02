@@ -1,0 +1,40 @@
+<p>
+  When multiple consecutive steps share the same semantic type (context, action,
+  or outcome), subsequent steps should use <code>And</code> or <code>But</code>
+  instead of repeating the primary keyword (<code>Given</code>, <code>When</code>,
+  or <code>Then</code>). Repeating the same keyword obscures the logical
+  structure and makes the scenario harder to read.
+</p>
+
+<h2>Noncompliant Code Example</h2>
+<pre>
+Feature: Shopping cart
+
+  Scenario: Add items to cart
+    Given the customer has an active session
+    Given the customer has an empty cart              &lt;!-- Noncompliant --&gt;
+    When the customer adds "Widget" to the cart
+    When the customer adds "Gadget" to the cart       &lt;!-- Noncompliant --&gt;
+    Then the cart contains 2 items
+    Then the cart total reflects both items            &lt;!-- Noncompliant --&gt;
+</pre>
+
+<h2>Compliant Solution</h2>
+<pre>
+Feature: Shopping cart
+
+  Scenario: Add items to cart
+    Given the customer has an active session
+    And the customer has an empty cart
+    When the customer adds "Widget" to the cart
+    And the customer adds "Gadget" to the cart
+    Then the cart contains 2 items
+    And the cart total reflects both items
+</pre>
+
+<h2>Notes</h2>
+<p>
+  <code>And</code> and <code>But</code> are conjunction keywords that inherit
+  the type of the preceding primary keyword. Using them clarifies that the
+  step is a continuation of the same category rather than a separate concern.
+</p>
