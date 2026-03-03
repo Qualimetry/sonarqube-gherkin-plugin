@@ -1,0 +1,57 @@
+<p>
+  Doc strings (triple-quoted blocks delimited by <code>"""</code> or
+  <code>```</code>) must not be empty. An empty doc string serves no
+  purpose - it was either left as a placeholder that was never filled
+  in, or its content was deleted without removing the delimiters.
+  This is always a mistake.
+</p>
+
+<h2>Noncompliant Code Example</h2>
+<pre>
+Feature: API testing
+
+  Scenario: Submit an empty payload
+    Given the API endpoint is available
+    When the user submits the following payload:  &lt;!-- Noncompliant --&gt;
+      """
+      """
+    Then the response status is 400
+</pre>
+<p>
+  The doc string between the <code>"""</code> delimiters is empty.
+  If the intent is to test with an empty payload, use an explicit
+  empty string in the step text instead.
+</p>
+
+<h2>Compliant Solution</h2>
+<p>Either fill in the doc string with content:</p>
+<pre>
+Feature: API testing
+
+  Scenario: Submit a JSON payload
+    Given the API endpoint is available
+    When the user submits the following payload:
+      """json
+      {
+        "name": "Alice",
+        "email": "alice@example.com"
+      }
+      """
+    Then the response status is 200
+</pre>
+<p>Or remove the doc string entirely if it is not needed:</p>
+<pre>
+Feature: API testing
+
+  Scenario: Submit an empty payload
+    Given the API endpoint is available
+    When the user submits an empty payload
+    Then the response status is 400
+</pre>
+
+<h2>Exceptions</h2>
+<p>
+  Doc strings containing only whitespace are treated as empty.
+  Doc strings with a content type annotation (e.g., <code>"""json</code>)
+  but no body are still flagged. Steps without doc strings are not affected.
+</p>

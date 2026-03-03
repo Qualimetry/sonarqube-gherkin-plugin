@@ -1,0 +1,36 @@
+<p>
+  Lines in Gherkin files should not end with trailing whitespace. Trailing
+  spaces and tabs are invisible to most readers but can create noise in
+  version control diffs, cause unexpected merge conflicts, and make files
+  larger than necessary. Many editors can be configured to strip trailing
+  whitespace automatically on save.
+</p>
+
+<h2>Noncompliant Code Example</h2>
+<p>Lines ending with trailing spaces (shown with <code>·</code>):</p>
+<pre>
+Feature: Payment processing··                        &lt;!-- Noncompliant --&gt;
+
+  Scenario: Process credit card payment···            &lt;!-- Noncompliant --&gt;
+    Given the customer has items in the cart
+    When the customer pays with a credit card··       &lt;!-- Noncompliant --&gt;
+    Then the payment is processed
+</pre>
+
+<h2>Compliant Solution</h2>
+<pre>
+Feature: Payment processing
+
+  Scenario: Process credit card payment
+    Given the customer has items in the cart
+    When the customer pays with a credit card
+    Then the payment is processed
+</pre>
+
+<h2>Notes</h2>
+<p>
+  Most IDEs provide a "trim trailing whitespace on save" option. Enabling
+  this setting ensures that trailing whitespace is removed automatically.
+  You can also use an <code>.editorconfig</code> file with
+  <code>trim_trailing_whitespace = true</code> to enforce this across the team.
+</p>

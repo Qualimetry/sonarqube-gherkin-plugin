@@ -1,0 +1,35 @@
+<p>
+  Every <code>Feature</code> must have a non-empty name. The Feature name
+  appears in test reports, dashboards, and CI/CD pipelines. An unnamed
+  Feature makes it impossible to quickly identify which business capability
+  is being tested when reviewing results or investigating failures.
+</p>
+
+<h2>Noncompliant Code Example</h2>
+<pre>
+Feature:                                        &lt;!-- Noncompliant --&gt;
+
+  Scenario: Transfer funds between accounts
+    Given the customer has a savings account with a balance of $5000
+    When the customer transfers $500 to their checking account
+    Then the savings account balance should be $4500
+    And the checking account balance should increase by $500
+</pre>
+
+<h2>Compliant Solution</h2>
+<p>Provide a meaningful name that describes the business capability:</p>
+<pre>
+Feature: Inter-account fund transfers
+
+  Scenario: Transfer funds between accounts
+    Given the customer has a savings account with a balance of $5000
+    When the customer transfers $500 to their checking account
+    Then the savings account balance should be $4500
+    And the checking account balance should increase by $500
+</pre>
+
+<h2>See Also</h2>
+<ul>
+  <li><code>feature-description-recommended</code> &mdash; Features should also include a description</li>
+  <li><code>unique-feature-name</code> &mdash; Feature names must be unique across files</li>
+</ul>

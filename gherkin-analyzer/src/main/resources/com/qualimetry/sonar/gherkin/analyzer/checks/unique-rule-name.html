@@ -1,0 +1,48 @@
+<p>
+  <code>Rule</code> names within a single <code>Feature</code> must be unique.
+  Duplicate Rule names indicate copy-paste errors or poor feature decomposition.
+  When multiple Rules share the same name, test reports become ambiguous and it
+  is impossible to determine which business rule a test result belongs to.
+</p>
+
+<h2>Noncompliant Code Example</h2>
+<pre>
+Feature: Order Management
+
+  Rule: Order validation
+    Scenario: Validate order total
+      Given an order with 3 items
+      When the order total is calculated
+      Then the total should be correct
+
+  Rule: Order validation                          &lt;!-- Noncompliant --&gt;
+    Scenario: Validate shipping address
+      Given an order with a shipping address
+      When the address is validated
+      Then the address should be accepted
+</pre>
+
+<h2>Compliant Solution</h2>
+<p>Give each Rule a unique, descriptive name:</p>
+<pre>
+Feature: Order Management
+
+  Rule: Order total validation
+    Scenario: Validate order total
+      Given an order with 3 items
+      When the order total is calculated
+      Then the total should be correct
+
+  Rule: Shipping address validation
+    Scenario: Validate shipping address
+      Given an order with a shipping address
+      When the address is validated
+      Then the address should be accepted
+</pre>
+
+<h2>See Also</h2>
+<ul>
+  <li><code>rule-name-required</code> &mdash; Rule blocks must have a name</li>
+  <li><code>unique-feature-name</code> &mdash; Similar check for Feature names across files</li>
+  <li><code>unique-scenario-name</code> &mdash; Similar check for Scenario names</li>
+</ul>

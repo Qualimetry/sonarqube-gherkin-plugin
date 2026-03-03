@@ -1,0 +1,58 @@
+<p>
+  Steps should use business language that describes what the system does from
+  a user or business perspective, not technical implementation details. Avoid
+  UI-specific terms like "click", "field", "dropdown", or "textbox" as
+  these tie scenarios to specific user interface implementations. Ordinary
+  words such as "page" or "button" are not flagged. Instead,
+  focus on the business action or outcome, making scenarios more maintainable
+  and allowing the underlying implementation to change without updating tests.
+</p>
+
+<h2>Suggested alternatives</h2>
+<p>Describe the <em>action</em> or <em>data</em>, not the control type:</p>
+<ul>
+  <li><strong>checkbox</strong> &rarr; the choice or preference: "opts in to ...", "agrees to ...", "enables ...", "turns on ..."</li>
+  <li><strong>textbox / field / input</strong> &rarr; the data: "enters ...", "provides ...", "sets ... to ..." (e.g. "the user provides email ...")</li>
+  <li><strong>dropdown / select</strong> &rarr; the selection: "chooses ...", "picks ...", "sets ... to ..." (e.g. "the user chooses country ...")</li>
+  <li><strong>radio</strong> &rarr; the option chosen: "chooses ...", "selects option ..."</li>
+  <li><strong>click</strong> &rarr; the action: "submits ...", "confirms ...", "opens ...", "navigates to ..."</li>
+  <li><strong>link</strong> &rarr; the destination or action: "goes to ...", "opens ...", "navigates to ..."</li>
+  <li><strong>submit</strong> &rarr; the outcome: "submits the form" &rarr; "submits the registration" or "confirms the order"</li>
+  <li><strong>modal / popup / tab</strong> &rarr; the outcome or place: "the confirmation appears", "switches to ... section"</li>
+</ul>
+<p>If the control type is essential to your domain (e.g. accessibility specs), you can turn this rule off for that project or use <code>no-restricted-patterns</code> to allow specific terms.</p>
+
+<h2>Noncompliant Code Example</h2>
+<pre>
+Feature: Account registration
+
+  Scenario: Register new customer account
+    Given the user is on the registration page
+    When the user clicks the "Email" field
+    And the user types "customer@example.com" into the email field
+    And the user clicks the "Password" field
+    And the user types "SecurePass123" into the password field
+    And the user clicks the "Submit" button
+    Then the user is redirected to the welcome page
+    And a success message is displayed on the page
+</pre>
+
+<h2>Compliant Solution</h2>
+<p>Use business language focused on actions and outcomes:</p>
+<pre>
+Feature: Account registration
+
+  Scenario: Register new customer account
+    Given the customer wants to create an account
+    When the customer provides email "customer@example.com"
+    And the customer sets password "SecurePass123"
+    And the customer submits the registration
+    Then the account is created successfully
+    And the customer receives a welcome notification
+</pre>
+
+<h2>See Also</h2>
+<ul>
+  <li><code>step-order-given-when-then</code> &mdash; Steps must follow Given/When/Then order</li>
+  <li><code>step-count-limit</code> &mdash; Scenarios should not exceed a maximum number of steps</li>
+</ul>

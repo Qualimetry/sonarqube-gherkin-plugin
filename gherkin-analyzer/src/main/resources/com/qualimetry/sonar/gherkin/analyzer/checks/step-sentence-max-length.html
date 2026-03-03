@@ -1,0 +1,42 @@
+<p>
+  Step sentences should not exceed a configurable maximum length. Extremely
+  long step sentences reduce readability and often indicate that the step is
+  trying to express too much in a single statement. Breaking long steps into
+  shorter, more focused steps improves clarity and makes the feature file
+  easier to maintain.
+</p>
+
+<h2>Noncompliant Code Example</h2>
+<p>With the default limit of 100 characters:</p>
+<pre>
+Feature: Subscription management
+
+  Scenario: Customer upgrades with add-ons
+    Given the customer has an active basic subscription
+    When the customer navigates to the special promotions page and adds the premium yearly
+         subscription plan with all optional add-ons and extended warranty coverage to their
+         shopping cart                                &lt;!-- Noncompliant; step text exceeds 100 chars --&gt;
+    Then the upgrade is applied
+</pre>
+
+<h2>Compliant Solution</h2>
+<pre>
+Feature: Subscription management
+
+  Scenario: Customer upgrades with add-ons
+    Given the customer has an active basic subscription
+    When the customer selects the premium yearly plan
+    And the customer adds all optional add-ons
+    Then the upgrade is applied
+</pre>
+
+<h2>Configuration</h2>
+<p>
+  The <code>maxLength</code> parameter controls the maximum allowed number
+  of characters in the step sentence text (excluding the keyword). The
+  default value is <strong>100</strong>.
+</p>
+<table>
+  <tr><th>Parameter</th><th>Type</th><th>Default</th></tr>
+  <tr><td><code>maxLength</code></td><td>int</td><td>100</td></tr>
+</table>

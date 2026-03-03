@@ -1,0 +1,62 @@
+<p>
+  Scenarios should include a description explaining their purpose,
+  acceptance criteria, or business context. A description below the
+  Scenario name provides valuable context about why this test exists
+  and what business outcome it verifies. Without it, readers must
+  infer the purpose from the step sequence alone, which is more
+  difficult and error-prone.
+</p>
+
+<h2>Noncompliant Code Example</h2>
+<pre>
+Feature: User authentication
+
+  Scenario: Successful login                 &lt;!-- Noncompliant --&gt;
+    Given the user is on the login page
+    When the user enters valid credentials
+    Then the user is redirected to the dashboard
+
+  Scenario Outline: Login with different roles  &lt;!-- Noncompliant --&gt;
+    Given the user is on the login page
+    When the user logs in as "&lt;role&gt;"
+    Then the user sees the "&lt;dashboard&gt;" dashboard
+
+    Examples:
+      | role  | dashboard |
+      | admin | admin     |
+      | user  | user      |
+</pre>
+
+<h2>Compliant Solution</h2>
+<p>Add a description below the Scenario name:</p>
+<pre>
+Feature: User authentication
+
+  Scenario: Successful login
+    Verifies that a user with valid credentials can successfully
+    log in to the system and is redirected to the dashboard.
+
+    Given the user is on the login page
+    When the user enters valid credentials
+    Then the user is redirected to the dashboard
+
+  Scenario Outline: Login with different roles
+    Tests login behaviour across different user roles to ensure
+    proper access control and dashboard routing.
+
+    Given the user is on the login page
+    When the user logs in as "&lt;role&gt;"
+    Then the user sees the "&lt;dashboard&gt;" dashboard
+
+    Examples:
+      | role  | dashboard |
+      | admin | admin     |
+      | user  | user      |
+</pre>
+
+<h2>Exceptions</h2>
+<p>
+  This rule is off by default because many teams prefer concise
+  scenarios where the name is sufficient to convey the purpose.
+  Enable it to encourage more thorough documentation of test intent.
+</p>

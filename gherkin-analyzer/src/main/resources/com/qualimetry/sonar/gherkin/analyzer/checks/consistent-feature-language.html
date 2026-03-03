@@ -1,0 +1,41 @@
+<p>
+  All <code>Feature</code> files in a project should use the same Gherkin
+  language. Mixing languages (e.g., some features in English and others
+  in French) reduces readability and consistency across the test suite.
+  The first language encountered during analysis is treated as the
+  expected language for all features.
+</p>
+
+<h2>Noncompliant Code Example</h2>
+<p>In <code>login.feature</code> (English):</p>
+<pre>
+Feature: User login
+  Scenario: Login with valid credentials
+    Given the user is on the login page
+    When the user enters valid credentials
+    Then the user is redirected to the dashboard
+</pre>
+<p>In <code>commandes.feature</code> (French):</p>
+<pre>
+# language: fr
+Fonctionnalité: Gestion des commandes           &lt;!-- Noncompliant: inconsistent language --&gt;
+  Scénario: Passer une commande
+    Etant donné que le client est connecté
+    Quand le client passe une commande
+    Alors la commande est confirmée
+</pre>
+
+<h2>Compliant Solution</h2>
+<p>Use the same language for all features:</p>
+<pre>
+Feature: Order management
+  Scenario: Place an order
+    Given the customer is logged in
+    When the customer places an order
+    Then the order is confirmed
+</pre>
+
+<h2>See Also</h2>
+<ul>
+  <li><code>feature-name-required</code> &mdash; Features must have a non-empty name</li>
+</ul>

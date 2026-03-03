@@ -1,0 +1,43 @@
+<p>
+  Tag names should match a permitted pattern or set of values. By default, any
+  tag name is allowed (pattern <code>.*</code>). Configure the pattern to
+  restrict tags to specific values or naming conventions, ensuring consistency
+  and preventing typos or unauthorized tags.
+</p>
+
+<h2>Noncompliant Code Example</h2>
+<p>Tag names that do not match a configured pattern (e.g., <code>smoke|regression|api</code>):</p>
+<pre>
+@smoke
+@regression
+@unauthorized-tag     &lt;!-- Noncompliant; not in permitted list --&gt;
+@api
+@typo-tag             &lt;!-- Noncompliant; not in permitted list --&gt;
+</pre>
+
+<h2>Compliant Solution</h2>
+<p>Tag names that match the permitted pattern:</p>
+<pre>
+@smoke
+@regression
+@api
+@integration
+</pre>
+
+<h2>Configuration</h2>
+<p>
+  The <code>pattern</code> parameter is a regular expression that tag names
+  must match. The default pattern is <code>.*</code> (allows any tag).
+</p>
+<table>
+  <tr><th>Parameter</th><th>Type</th><th>Default</th></tr>
+  <tr>
+    <td><code>pattern</code></td>
+    <td>String (regex)</td>
+    <td><code>.*</code></td>
+  </tr>
+</table>
+<p>
+  Example: Set <code>pattern</code> to <code>smoke|regression|api|integration</code>
+  to only allow these specific tag values.
+</p>

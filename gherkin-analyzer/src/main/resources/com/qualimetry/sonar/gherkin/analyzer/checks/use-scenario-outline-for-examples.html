@@ -1,0 +1,49 @@
+<p>
+  Examples tables belong with <code>Scenario Outline</code>, not with plain
+  <code>Scenario</code>. Per the Gherkin specification, only Scenario Outline
+  is designed to run the same steps multiple times with data from an Examples
+  table. Using Examples under a regular Scenario is invalid or unsupported
+  usage: many parsers accept it without error, but the Examples may be
+  ignored at runtime or lead to unexpected test behaviour. Use
+  <code>Scenario Outline</code> with <code>&lt;placeholder&gt;</code> parameters
+  in the steps when you need parameterised data.
+</p>
+
+<h2>Noncompliant Code Example</h2>
+<pre>
+Feature: Product pricing
+
+  Scenario: Calculate product price with discount    &lt;!-- Noncompliant --&gt;
+    Given the product "Widget" has a base price of $100
+    When a discount of 10% is applied
+    Then the final price is $90
+
+    Examples:
+      | Product  | Base Price | Discount | Final Price |
+      | Widget   | 100        | 10       | 90          |
+      | Gadget   | 200        | 15       | 170         |
+      | Tool     | 50         | 5        | 47.50       |
+</pre>
+
+<h2>Compliant Solution</h2>
+<p>Use Scenario Outline instead of Scenario when using Examples:</p>
+<pre>
+Feature: Product pricing
+
+  Scenario Outline: Calculate product price with discount
+    Given the product "&lt;Product&gt;" has a base price of $&lt;Base Price&gt;
+    When a discount of &lt;Discount&gt;% is applied
+    Then the final price is $&lt;Final Price&gt;
+
+    Examples:
+      | Product | Base Price | Discount | Final Price |
+      | Widget  | 100        | 10       | 90          |
+      | Gadget  | 200        | 15       | 170         |
+      | Tool    | 50         | 5        | 47.50       |
+</pre>
+
+<h2>See Also</h2>
+<ul>
+  <li><code>examples-minimum-rows</code> &mdash; Examples tables should have a minimum number of rows</li>
+  <li><code>examples-column-coverage</code> &mdash; Examples tables should cover all placeholders</li>
+</ul>

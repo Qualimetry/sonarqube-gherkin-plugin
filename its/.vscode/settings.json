@@ -1,0 +1,226 @@
+{
+    "gherkinAnalyzer.rules": {
+        "comment-format": {
+            "enabled": true,
+            "severity": "minor"
+        },
+        "no-duplicate-steps": {
+            "enabled": true,
+            "severity": "critical"
+        },
+        "no-partially-commented-tag-lines": {
+            "enabled": true,
+            "severity": "minor"
+        },
+        "no-redundant-rule-tags": {
+            "enabled": true,
+            "severity": "minor"
+        },
+        "when-then-required": {
+            "enabled": true,
+            "severity": "critical"
+        },
+        "examples-minimum-rows": {
+            "enabled": true,
+            "severity": "critical"
+        },
+        "no-duplicate-tags": {
+            "enabled": true,
+            "severity": "minor"
+        },
+        "scenario-count-limit": {
+            "enabled": true,
+            "severity": "major",
+            "maxScenarios": "12"
+        },
+        "single-when-per-scenario": {
+            "enabled": true,
+            "severity": "major"
+        },
+        "step-count-limit": {
+            "enabled": true,
+            "severity": "major",
+            "maxSteps": "12"
+        },
+        "unique-scenario-name": {
+            "enabled": true,
+            "severity": "major"
+        },
+        "background-given-only": {
+            "enabled": true,
+            "severity": "critical"
+        },
+        "todo-comment": {
+            "enabled": true,
+            "severity": "info"
+        },
+        "unique-rule-name": {
+            "enabled": true,
+            "severity": "major"
+        },
+        "newline-at-end-of-file": {
+            "enabled": true,
+            "severity": "minor"
+        },
+        "no-redundant-tags": {
+            "enabled": true,
+            "severity": "minor"
+        },
+        "examples-separator-line": {
+            "enabled": true,
+            "severity": "minor"
+        },
+        "no-multiple-empty-lines": {
+            "enabled": true,
+            "severity": "minor"
+        },
+        "no-tab-characters": {
+            "enabled": true,
+            "severity": "minor"
+        },
+        "no-trailing-whitespace": {
+            "enabled": true,
+            "severity": "minor"
+        },
+        "step-order-given-when-then": {
+            "enabled": true,
+            "severity": "critical"
+        },
+        "step-required": {
+            "enabled": true,
+            "severity": "major"
+        },
+        "unique-examples-headers": {
+            "enabled": true,
+            "severity": "critical"
+        },
+        "rule-tag-placement": {
+            "enabled": true,
+            "severity": "minor"
+        },
+        "scenario-outline-requires-examples": {
+            "enabled": true,
+            "severity": "major"
+        },
+        "fixme-comment": {
+            "enabled": true,
+            "severity": "info"
+        },
+        "unique-feature-name": {
+            "enabled": true,
+            "severity": "major"
+        },
+        "rule-name-required": {
+            "enabled": true,
+            "severity": "critical"
+        },
+        "use-scenario-outline-for-examples": {
+            "enabled": true,
+            "severity": "major"
+        },
+        "examples-column-coverage": {
+            "enabled": true,
+            "severity": "critical"
+        },
+        "file-name-convention": {
+            "enabled": true,
+            "severity": "minor",
+            "pattern": "^[a-z][-A-Za-z0-9]*\\.feature$"
+        },
+        "scenario-required": {
+            "enabled": true,
+            "severity": "major"
+        },
+        "no-unused-variables": {
+            "enabled": true,
+            "severity": "major"
+        },
+        "background-step-count-limit": {
+            "enabled": true,
+            "severity": "major",
+            "maxSteps": "5"
+        },
+        "consistent-indentation": {
+            "enabled": true,
+            "severity": "minor",
+            "indentation": "2"
+        },
+        "feature-name-required": {
+            "enabled": true,
+            "severity": "critical"
+        },
+        "shared-given-to-background": {
+            "enabled": true,
+            "severity": "major"
+        },
+        "feature-rule-count-limit": {
+            "enabled": true,
+            "severity": "major",
+            "maxRules": "8"
+        },
+        "business-language-only": {
+            "enabled": true,
+            "severity": "major"
+        },
+        "scenario-name-required": {
+            "enabled": true,
+            "severity": "critical"
+        },
+        "no-unknown-step-type": {
+            "enabled": true,
+            "severity": "major"
+        },
+        "prefer-and-but-keywords": {
+            "enabled": true,
+            "severity": "minor"
+        },
+        "tag-name-pattern": {
+            "enabled": true,
+            "severity": "minor",
+            "pattern": "^[a-z][-a-z0-9]*$"
+        },
+        "no-byte-order-mark": {
+            "enabled": true,
+            "severity": "major"
+        },
+        "step-sentence-max-length": {
+            "enabled": true,
+            "severity": "major",
+            "maxLength": "100"
+        },
+        "one-space-between-tags": {
+            "enabled": true,
+            "severity": "minor"
+        },
+        "tag-placement": {
+            "enabled": true,
+            "severity": "minor"
+        },
+        "no-empty-doc-strings": {
+            "enabled": true,
+            "severity": "minor"
+        },
+        "parse-error": {
+            "enabled": true,
+            "severity": "critical"
+        },
+        "rule-scenario-count-limit": {
+            "enabled": true,
+            "severity": "major",
+            "maxScenarios": "10"
+        },
+        "rule-scenario-required": {
+            "enabled": true,
+            "severity": "major"
+        },
+        "blank-line-before-scenario": {
+            "enabled": true,
+            "severity": "minor"
+        },
+        "feature-file-required": {
+            "enabled": true,
+            "severity": "major"
+        }
+    },
+    "gherkinAnalyzer.rulesReplaceDefaults": true
+}

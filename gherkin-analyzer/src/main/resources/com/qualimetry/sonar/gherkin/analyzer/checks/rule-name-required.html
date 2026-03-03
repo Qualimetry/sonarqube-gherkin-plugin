@@ -1,0 +1,36 @@
+<p>
+  Every <code>Rule</code> block must have a non-empty name. The <code>Rule</code>
+  keyword (introduced in Gherkin 6) groups scenarios under a business rule within
+  a Feature. A Rule without a name fails to document which business rule is being
+  validated, making test reports and documentation unreadable.
+</p>
+
+<h2>Noncompliant Code Example</h2>
+<pre>
+Feature: Online Shopping
+
+  Rule:                                           &lt;!-- Noncompliant --&gt;
+    Scenario: Add item to cart
+      Given the customer is browsing products
+      When the customer adds "Laptop" to the cart
+      Then the cart should contain 1 item
+</pre>
+
+<h2>Compliant Solution</h2>
+<p>Provide a meaningful name that describes the business rule:</p>
+<pre>
+Feature: Online Shopping
+
+  Rule: Cart management
+    Scenario: Add item to cart
+      Given the customer is browsing products
+      When the customer adds "Laptop" to the cart
+      Then the cart should contain 1 item
+</pre>
+
+<h2>See Also</h2>
+<ul>
+  <li><code>rule-description-recommended</code> &mdash; Rules should also include a description</li>
+  <li><code>unique-rule-name</code> &mdash; Rule names must be unique within a Feature</li>
+  <li><code>feature-name-required</code> &mdash; Similar check for Feature names</li>
+</ul>

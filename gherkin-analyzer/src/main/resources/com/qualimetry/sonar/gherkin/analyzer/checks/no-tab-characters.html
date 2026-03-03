@@ -1,0 +1,37 @@
+<p>
+  Gherkin files should not contain tab characters for indentation or anywhere
+  else in the file. Tabs display differently depending on the editor, terminal,
+  and viewer settings, leading to inconsistent alignment across team members'
+  environments. Using spaces instead of tabs guarantees that files look the
+  same everywhere.
+</p>
+
+<h2>Noncompliant Code Example</h2>
+<p>Lines indented with tab characters:</p>
+<pre>
+Feature: Invoice generation
+
+&#9;Scenario: Generate monthly invoice               &lt;!-- Noncompliant --&gt;
+&#9;&#9;Given the billing cycle has ended             &lt;!-- Noncompliant --&gt;
+&#9;&#9;When the system generates the invoice
+&#9;&#9;Then the invoice is sent to the customer
+</pre>
+
+<h2>Compliant Solution</h2>
+<p>Use spaces for all indentation:</p>
+<pre>
+Feature: Invoice generation
+
+  Scenario: Generate monthly invoice
+    Given the billing cycle has ended
+    When the system generates the invoice
+    Then the invoice is sent to the customer
+</pre>
+
+<h2>Notes</h2>
+<p>
+  Most modern editors can be configured to insert spaces when the Tab key is
+  pressed. Enable this setting in your editor to avoid accidentally introducing
+  tab characters. If your project uses an <code>.editorconfig</code> file, set
+  <code>indent_style = space</code> to enforce spaces project-wide.
+</p>

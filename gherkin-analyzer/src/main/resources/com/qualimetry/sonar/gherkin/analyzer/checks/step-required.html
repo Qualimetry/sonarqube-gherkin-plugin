@@ -1,0 +1,40 @@
+<p>
+  Every <code>Scenario</code>, <code>Scenario Outline</code>, and
+  <code>Background</code> must contain at least one step. A scenario
+  without steps provides no test behaviour and a background without steps
+  provides no shared setup. These are indicators of incomplete specifications
+  that should be finished or removed.
+</p>
+
+<h2>Noncompliant Code Example</h2>
+<pre>
+Feature: Customer loyalty program
+
+  Scenario: Customer earns loyalty points       &lt;!-- Noncompliant --&gt;
+
+  Scenario: Customer redeems loyalty points
+    Given the customer has 500 loyalty points
+    When the customer redeems 200 points at checkout
+    Then the order total is reduced by $20
+</pre>
+
+<h2>Compliant Solution</h2>
+<p>Add steps to the empty scenario:</p>
+<pre>
+Feature: Customer loyalty program
+
+  Scenario: Customer earns loyalty points
+    Given the customer is enrolled in the loyalty program
+    When the customer completes a purchase of $100
+    Then the customer earns 100 loyalty points
+
+  Scenario: Customer redeems loyalty points
+    Given the customer has 500 loyalty points
+    When the customer redeems 200 points at checkout
+    Then the order total is reduced by $20
+</pre>
+
+<h2>See Also</h2>
+<ul>
+  <li><code>scenario-required</code> &mdash; Features must contain at least one Scenario</li>
+</ul>

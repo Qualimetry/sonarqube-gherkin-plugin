@@ -1,0 +1,51 @@
+<p>
+  Scenarios within the same Feature or Rule block should not have identical
+  step sequences. Duplicate scenario bodies increase maintenance cost,
+  inflate test counts without adding coverage, and often indicate missed
+  opportunities for Scenario Outline parameterisation or shared Background
+  extraction.
+</p>
+
+<h2>Noncompliant Code Example</h2>
+<pre>
+Feature: User management
+
+  Scenario: Create a new user
+    Given an admin is logged in
+    When the admin creates a new user
+    Then the user is added to the system
+
+  Scenario: Duplicate user creation          &lt;!-- Noncompliant --&gt;
+    Given an admin is logged in
+    When the admin creates a new user
+    Then the user is added to the system
+</pre>
+<p>
+  Both scenarios have identical step sequences. The second one provides no
+  additional test coverage.
+</p>
+
+<h2>Compliant Solution</h2>
+<p>Remove the duplicate or extract differences into a Scenario Outline:</p>
+<pre>
+Feature: User management
+
+  Scenario: Create a new user
+    Given an admin is logged in
+    When the admin creates a new user
+    Then the user is added to the system
+
+  Scenario: Deactivate a user
+    Given an admin is logged in
+    When the admin deactivates a user
+    Then the user can no longer log in
+</pre>
+
+<h2>Scope</h2>
+<p>
+  Feature-level scenarios are compared only with other Feature-level
+  scenarios. Scenarios inside a <code>Rule</code> block are compared only
+  within that same Rule. There is no cross-Rule or cross-Feature comparison.
+  Scenarios with zero steps are excluded (already caught by
+  <code>step-required</code>).
+</p>

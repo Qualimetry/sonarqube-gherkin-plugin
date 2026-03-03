@@ -1,0 +1,38 @@
+<p>
+  Features should include a description below the <code>Feature</code> name.
+  The description provides context about the business domain, the user story,
+  or the acceptance criteria being validated. Without a description, readers
+  must infer the purpose of the feature solely from the scenario names, which
+  may not convey enough information for stakeholders unfamiliar with the codebase.
+</p>
+
+<h2>Noncompliant Code Example</h2>
+<pre>
+Feature: Account registration                   &lt;!-- Noncompliant --&gt;
+
+  Scenario: New customer registers with valid email
+    Given the registration page is displayed
+    When the customer enters a valid email address and password
+    Then the account is created successfully
+    And a confirmation email is sent
+</pre>
+
+<h2>Compliant Solution</h2>
+<p>Add a description that explains the business context:</p>
+<pre>
+Feature: Account registration
+  New customers must be able to create an account using a valid email
+  address. The registration process includes email verification to
+  prevent fraudulent accounts.
+
+  Scenario: New customer registers with valid email
+    Given the registration page is displayed
+    When the customer enters a valid email address and password
+    Then the account is created successfully
+    And a confirmation email is sent
+</pre>
+
+<h2>See Also</h2>
+<ul>
+  <li><code>feature-name-required</code> &mdash; Features must have a non-empty name</li>
+</ul>

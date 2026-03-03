@@ -1,0 +1,40 @@
+<p>
+  Every <code>Rule</code> block must contain at least one <code>Scenario</code>
+  or <code>Example</code>. A <code>Rule</code> block without any scenarios
+  serves no purpose &mdash; it declares a business rule but provides no test
+  coverage to validate it. This is almost always an incomplete implementation
+  or a placeholder that was never filled in.
+</p>
+
+<h2>Noncompliant Code Example</h2>
+<pre>
+Feature: Payment Processing
+
+  Rule: Refund policy                             &lt;!-- Noncompliant --&gt;
+    Background:
+      Given the store has a 30-day refund policy
+</pre>
+
+<h2>Compliant Solution</h2>
+<p>Add at least one Scenario to the Rule block:</p>
+<pre>
+Feature: Payment Processing
+
+  Rule: Refund policy
+    Background:
+      Given the store has a 30-day refund policy
+
+    Scenario: Refund within 30 days
+      When a customer requests a refund within 30 days
+      Then the refund is approved
+
+    Scenario: Refund after 30 days
+      When a customer requests a refund after 30 days
+      Then the refund is denied
+</pre>
+
+<h2>See Also</h2>
+<ul>
+  <li><code>scenario-required</code> &mdash; Similar check at the Feature level</li>
+  <li><code>rule-name-required</code> &mdash; Rule blocks must have a name</li>
+</ul>
