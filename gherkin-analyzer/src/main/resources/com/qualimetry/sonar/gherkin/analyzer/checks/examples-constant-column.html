@@ -1,0 +1,50 @@
+<p>
+  An Examples column whose value is identical in every data row adds no
+  variation between examples. The constant value should be inlined into the
+  step text and the column removed, leaving the table to show only what
+  actually varies between scenarios. This keeps Examples tables focused and
+  easier to review.
+</p>
+<p>
+  Tables with fewer than two data rows are skipped, and each Examples
+  section of a Scenario Outline is judged independently - a value that is
+  constant within one section is flagged even if other sections use
+  different values.
+</p>
+
+<h2>Noncompliant Code Example</h2>
+<pre>
+Feature: Discount calculation
+
+  Scenario Outline: Apply discount
+    Given a customer of type "&lt;type&gt;"
+    When an order of &lt;amount&gt; is placed
+    Then the discount is &lt;discount&gt;
+
+    Examples:                                &lt;!-- Noncompliant - "type" is always "gold" --&gt;
+      | type | amount | discount |
+      | gold | 100    | 10       |
+      | gold | 200    | 20       |
+</pre>
+
+<h2>Compliant Solution</h2>
+<p>Inline the constant value into the step and remove the column:</p>
+<pre>
+Feature: Discount calculation
+
+  Scenario Outline: Apply discount
+    Given a customer of type "gold"
+    When an order of &lt;amount&gt; is placed
+    Then the discount is &lt;discount&gt;
+
+    Examples:
+      | amount | discount |
+      | 100    | 10       |
+      | 200    | 20       |
+</pre>
+
+<h2>See Also</h2>
+<ul>
+  <li><code>no-unused-variables</code> - flags placeholders that no Examples column supplies.</li>
+  <li><code>examples-column-coverage</code> - flags Examples columns that no step placeholder consumes.</li>
+</ul>

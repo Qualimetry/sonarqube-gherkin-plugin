@@ -1,0 +1,46 @@
+<p>
+  Checks that data tables (in steps or <code>Examples</code> sections) do not exceed
+  a configurable column count. Wide data tables are difficult to read in editors
+  and code reviews, and usually indicate that the step is doing too much or that
+  the test data model needs restructuring.
+</p>
+<p>
+  The default limit is 10 columns. Teams can adjust this threshold based on their
+  project conventions and screen width preferences.
+</p>
+<h2>Noncompliant Code Example</h2>
+<p>With <code>maxColumns</code> set to <code>5</code>:</p>
+<pre>
+Scenario: Create user with full profile  <!-- Noncompliant -->
+  Given the following user data:
+    | name  | email       | phone    | address  | city    | country |
+    | Alice | a@test.com  | 555-0101 | 123 Main | Seattle | US      |
+</pre>
+<h2>Compliant Solution</h2>
+<pre>
+Scenario: Create user with full profile
+  Given the following user data:
+    | name  | email       | phone    |
+    | Alice | a@test.com  | 555-0101 |
+  And the user address is:
+    | address  | city    | country |
+    | 123 Main | Seattle | US      |
+</pre>
+<h2>Configuration</h2>
+<table>
+  <tr>
+    <th>Parameter</th>
+    <th>Description</th>
+    <th>Default</th>
+  </tr>
+  <tr>
+    <td><code>maxColumns</code></td>
+    <td>Maximum number of columns allowed in a data table (step or Examples).</td>
+    <td><code>10</code></td>
+  </tr>
+</table>
+<h2>See Also</h2>
+<ul>
+  <li><code>examples-column-coverage</code> - ensures Examples columns are used in step placeholders.</li>
+  <li><code>examples-minimum-rows</code> - ensures Examples sections have sufficient data rows.</li>
+</ul>

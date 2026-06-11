@@ -1,0 +1,48 @@
+<p>
+  Feature names should broadly correspond to their file names to aid
+  discoverability and navigation in large test suites. A file named
+  <code>payment-refund.feature</code> should contain a Feature with
+  a name related to payment refunds, not an unrelated topic like
+  "Order cancellation policy".
+</p>
+
+<h2>Noncompliant Code Example</h2>
+<p>File: <code>payment-refund.feature</code></p>
+<pre>
+Feature: Order cancellation policy           &lt;!-- Noncompliant --&gt;
+
+  Scenario: Cancel a pending order
+    Given a pending order exists
+    When the customer requests cancellation
+    Then the order is cancelled
+</pre>
+<p>
+  None of the significant words in the Feature name ("order",
+  "cancellation", "policy") appear in the file name
+  ("payment-refund").
+</p>
+
+<h2>Compliant Solution</h2>
+<p>File: <code>payment-refund.feature</code></p>
+<pre>
+Feature: Payment refund processing
+
+  Scenario: Refund a completed payment
+    Given a payment has been completed
+    When a refund is requested
+    Then the refund is processed
+</pre>
+
+<h2>How It Works</h2>
+<p>
+  Both the Feature name and the file name are "slugified" (lowercased,
+  non-alphanumeric characters replaced with hyphens). Words of 3 or
+  more characters from the Feature name are then checked against the
+  file name slug. If none of the Feature name's significant words
+  appear anywhere in the file name, an issue is reported.
+</p>
+<p>
+  This rule is off by default because the matching is inherently
+  heuristic and some teams use numeric prefixes or categorisation
+  schemes in file names that do not correspond to Feature names.
+</p>

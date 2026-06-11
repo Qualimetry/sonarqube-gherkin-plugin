@@ -1,0 +1,48 @@
+<p>
+  Each scenario should contain exactly one <code>When</code> step. A scenario
+  should test a single action or event, and multiple <code>When</code> steps
+  indicate that the scenario is testing multiple behaviours. Scenarios with
+  multiple <code>When</code> steps are harder to understand, maintain, and
+  debug when they fail, as it becomes unclear which action caused the failure.
+</p>
+
+<h2>Noncompliant Code Example</h2>
+<pre>
+Feature: User profile management
+
+  Scenario: Update profile and change password    &lt;!-- Noncompliant --&gt;
+    Given the user is logged in
+    And the user profile page is displayed
+    When the user updates their email address
+    And the user saves the changes
+    When the user changes their password           &lt;!-- Noncompliant --&gt;
+    And the user confirms the new password
+    Then the profile is updated successfully
+    And the password change is confirmed
+</pre>
+
+<h2>Compliant Solution</h2>
+<p>Split into separate scenarios, each with one When step:</p>
+<pre>
+Feature: User profile management
+
+  Scenario: Update profile email
+    Given the user is logged in
+    And the user profile page is displayed
+    When the user updates their email address
+    And the user saves the changes
+    Then the profile is updated successfully
+
+  Scenario: Change password
+    Given the user is logged in
+    And the user profile page is displayed
+    When the user changes their password
+    And the user confirms the new password
+    Then the password change is confirmed
+</pre>
+
+<h2>See Also</h2>
+<ul>
+  <li><code>when-then-required</code> &mdash; Scenarios should have at least one When and one Then step</li>
+  <li><code>step-order-given-when-then</code> &mdash; Steps must follow Given/When/Then order</li>
+</ul>

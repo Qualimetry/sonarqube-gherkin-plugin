@@ -1,0 +1,60 @@
+<p>
+  A <code>Scenario Outline</code> where every <code>Examples</code> section has only one data row
+  is functionally identical to a plain <code>Scenario</code> with hardcoded values. The
+  parameterization syntax adds structural complexity without providing any variation benefit.
+  Consider converting such outlines to plain <code>Scenario</code> blocks.
+</p>
+<p>
+  This is different from the <code>examples-minimum-rows</code> rule, which catches
+  <code>Examples</code> sections with zero data rows. This rule targets outlines that
+  technically work but gain nothing from parameterization.
+</p>
+<h2>Noncompliant Code Example</h2>
+<pre>
+Scenario Outline: User logs in  <!-- Noncompliant -->
+  Given the user navigates to the login page
+  When the user enters "&lt;username&gt;" and "&lt;password&gt;"
+  Then the user should see the dashboard
+
+  Examples:
+    | username | password |
+    | admin    | secret   |
+</pre>
+<h2>Compliant Solution</h2>
+<pre>
+Scenario: User logs in
+  Given the user navigates to the login page
+  When the user enters "admin" and "secret"
+  Then the user should see the dashboard
+</pre>
+<p>Or add more data rows to justify the Outline:</p>
+<pre>
+Scenario Outline: User logs in
+  Given the user navigates to the login page
+  When the user enters "&lt;username&gt;" and "&lt;password&gt;"
+  Then the user should see the dashboard
+
+  Examples:
+    | username | password  |
+    | admin    | secret    |
+    | editor   | editPass  |
+    | viewer   | viewPass  |
+</pre>
+<h2>Configuration</h2>
+<table>
+  <tr>
+    <th>Parameter</th>
+    <th>Description</th>
+    <th>Default</th>
+  </tr>
+  <tr>
+    <td><code>maxDataRows</code></td>
+    <td>Maximum data rows per Examples section that triggers the issue (all Examples must be at or below this threshold).</td>
+    <td><code>1</code></td>
+  </tr>
+</table>
+<h2>See Also</h2>
+<ul>
+  <li><code>examples-minimum-rows</code> - catches Examples sections with zero data rows.</li>
+  <li><code>use-scenario-outline-for-examples</code> - suggests converting duplicate Scenarios into Outlines.</li>
+</ul>

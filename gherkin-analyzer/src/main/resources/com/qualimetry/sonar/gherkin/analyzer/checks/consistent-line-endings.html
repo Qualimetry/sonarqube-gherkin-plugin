@@ -1,0 +1,39 @@
+<p>
+  All lines in a Gherkin file should use the same line ending style. Mixing
+  different line endings (<code>LF</code>, <code>CRLF</code>, or <code>CR</code>)
+  within a single file can cause issues in version control, produce noisy diffs,
+  and lead to unexpected behaviour in parsers and tools that assume a uniform
+  line ending format.
+</p>
+
+<h2>Noncompliant Code Example</h2>
+<p>File mixes <code>LF</code> and <code>CRLF</code> endings:</p>
+<pre>
+Feature: Subscription management(LF)
+(LF)
+  Scenario: Customer upgrades subscription(CRLF)     &lt;!-- Noncompliant --&gt;
+    Given the customer has a basic plan(LF)
+    When the customer selects the premium plan(CRLF)  &lt;!-- Noncompliant --&gt;
+    Then the subscription is upgraded(LF)
+</pre>
+
+<h2>Compliant Solution</h2>
+<p>All lines use the same line ending style (<code>LF</code> by default):</p>
+<pre>
+Feature: Subscription management(LF)
+(LF)
+  Scenario: Customer upgrades subscription(LF)
+    Given the customer has a basic plan(LF)
+    When the customer selects the premium plan(LF)
+    Then the subscription is upgraded(LF)
+</pre>
+
+<h2>Configuration</h2>
+<p>
+  The <code>lineEnding</code> parameter controls the expected line ending type.
+  The default value is <strong>LF</strong>.
+</p>
+<table>
+  <tr><th>Parameter</th><th>Type</th><th>Default</th></tr>
+  <tr><td><code>lineEnding</code></td><td>String</td><td>LF</td></tr>
+</table>

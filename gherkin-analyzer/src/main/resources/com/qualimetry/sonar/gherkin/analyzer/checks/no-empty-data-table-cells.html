@@ -1,0 +1,47 @@
+<p>
+  Each cell in a step-attached data table should contain a value. Empty cells
+  usually indicate incomplete test data and can result in steps silently
+  consuming blank values instead of meaningful data, which may cause
+  misleading test results. This rule is the data-table counterpart of
+  <code>no-empty-examples-cells</code>, which covers Examples tables.
+</p>
+
+<h2>Noncompliant Code Example</h2>
+<pre>
+Feature: User registration
+
+  Scenario: Register users
+    Given the following users exist:           &lt;!-- Noncompliant --&gt;
+      | name  | email             |
+      | alice |                   |
+      | bob   | bob@example.test  |
+</pre>
+<p>
+  The <code>email</code> cell in the second row is empty. The step will
+  receive a blank value, which may cause it to pass without testing
+  meaningful data.
+</p>
+
+<h2>Compliant Solution</h2>
+<p>Populate all cells with meaningful values:</p>
+<pre>
+Feature: User registration
+
+  Scenario: Register users
+    Given the following users exist:
+      | name  | email              |
+      | alice | alice@example.test |
+      | bob   | bob@example.test   |
+</pre>
+
+<h2>Exceptions</h2>
+<p>
+  This rule is off by default because some teams intentionally test with
+  empty values (e.g., form validation with blank fields). Enable it only
+  when empty cells always indicate incomplete test data in your project.
+</p>
+
+<h2>See Also</h2>
+<ul>
+  <li><code>no-empty-examples-cells</code> - the equivalent rule for Examples tables.</li>
+</ul>

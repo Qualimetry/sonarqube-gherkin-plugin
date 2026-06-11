@@ -1,0 +1,37 @@
+<p>
+  Files should end with a trailing newline character. The POSIX standard defines
+  a line as a sequence of characters ending with a newline. Files that do not
+  end with a newline may cause issues with certain tools that expect the
+  standard line format, including some diff utilities, shell commands, and
+  concatenation operations.
+</p>
+
+<h2>Noncompliant Code Example</h2>
+<p>File does not end with a newline (shown with <code>EOF</code>):</p>
+<pre>
+Feature: Shipment tracking
+
+  Scenario: Customer tracks a shipment
+    Given the customer has placed an order
+    When the customer views the tracking page
+    Then the current shipment status is displayedEOF   &lt;!-- Noncompliant --&gt;
+</pre>
+
+<h2>Compliant Solution</h2>
+<p>File ends with a newline after the last line:</p>
+<pre>
+Feature: Shipment tracking
+
+  Scenario: Customer tracks a shipment
+    Given the customer has placed an order
+    When the customer views the tracking page
+    Then the current shipment status is displayed
+</pre>
+
+<h2>Notes</h2>
+<p>
+  Most text editors add a trailing newline by default. If yours does not,
+  configure it to do so. In <code>.editorconfig</code> you can set
+  <code>insert_final_newline = true</code> to enforce this across the project.
+  This is a file-level issue reported once per file, not per line.
+</p>

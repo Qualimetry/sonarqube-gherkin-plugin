@@ -1,0 +1,37 @@
+<p>
+  Feature file names should follow a consistent naming convention. By default,
+  filenames must start with a lowercase letter, contain only letters, digits,
+  and hyphens, and end with the <code>.feature</code> extension. A consistent
+  naming convention makes it easier to locate files, avoids filesystem
+  compatibility issues across platforms, and improves organisation in large
+  projects.
+</p>
+
+<h2>Noncompliant Code Example</h2>
+<p>Filenames that violate the default pattern:</p>
+<pre>
+BadName.feature                   &lt;!-- Noncompliant; starts with uppercase --&gt;
+My Feature File.feature           &lt;!-- Noncompliant; contains spaces --&gt;
+123-numbers-first.feature         &lt;!-- Noncompliant; starts with digit --&gt;
+</pre>
+
+<h2>Compliant Solution</h2>
+<pre>
+account-registration.feature
+password-reset.feature
+order-history.feature
+</pre>
+
+<h2>Configuration</h2>
+<p>
+  The <code>pattern</code> parameter is a regular expression that filenames
+  must match. The default pattern is <code>^[a-z][-A-Za-z0-9]*\.feature$</code>.
+</p>
+<table>
+  <tr><th>Parameter</th><th>Type</th><th>Default</th></tr>
+  <tr>
+    <td><code>pattern</code></td>
+    <td>String (regex)</td>
+    <td><code>^[a-z][-A-Za-z0-9]*\.feature$</code></td>
+  </tr>
+</table>

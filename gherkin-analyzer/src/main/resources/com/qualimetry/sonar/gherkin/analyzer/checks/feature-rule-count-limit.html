@@ -1,0 +1,58 @@
+<p>
+  Features should not exceed a configurable number of <code>Rule</code> blocks.
+  Excessive <code>Rule</code> blocks in a single Feature suggest it covers too
+  many business domains and should be split into separate feature files.
+  The default limit is <strong>8</strong> <code>Rule</code> blocks per Feature.
+</p>
+
+<h2>Noncompliant Code Example</h2>
+<pre>
+Feature: E-commerce platform               <!-- Noncompliant -->
+
+  Rule: User registration
+    Scenario: Register new user
+      Given ...
+
+  Rule: Product catalog
+    Scenario: Browse products
+      Given ...
+
+  # ... 7 more Rule blocks ...
+
+  Rule: Analytics dashboard
+    Scenario: View analytics
+      Given ...
+</pre>
+
+<h2>Compliant Solution</h2>
+<pre>
+# user-management.feature
+Feature: User Management
+
+  Rule: User registration
+    Scenario: Register new user
+      Given ...
+
+  Rule: User authentication
+    Scenario: Log in
+      Given ...
+
+# product-catalog.feature
+Feature: Product Catalog
+
+  Rule: Product browsing
+    Scenario: Browse products
+      Given ...
+</pre>
+
+<h2>Configuration</h2>
+<p>
+  The <code>maxRules</code> parameter sets the maximum allowed <code>Rule</code>
+  blocks per Feature. Default value: <strong>8</strong>.
+</p>
+
+<h2>See Also</h2>
+<ul>
+  <li><code>scenario-count-limit</code> - limits scenarios per Feature</li>
+  <li><code>rule-scenario-count-limit</code> - limits scenarios per Rule block</li>
+</ul>

@@ -1,0 +1,55 @@
+<p>
+  Tags representing mutually exclusive states must not appear together on
+  the same element. For example, <code>@wip</code> and
+  <code>@release-ready</code>, or <code>@manual</code> and
+  <code>@automated</code>, are contradictory classifications that indicate
+  an inconsistency in the test metadata.
+</p>
+
+<h2>Noncompliant Code Example</h2>
+<p>With <code>conflictPairs</code> set to <code>wip+release-ready</code>:</p>
+<pre>
+Feature: Feature development
+
+  @wip @release-ready                       &lt;!-- Noncompliant --&gt;
+  Scenario: Work in progress feature
+    Given a new feature is being developed
+    When the feature is partially implemented
+    Then the tests should indicate incomplete work
+</pre>
+<p>
+  The <code>@wip</code> tag indicates the feature is in development, while
+  <code>@release-ready</code> indicates it is ready for release. Both
+  cannot be true simultaneously.
+</p>
+
+<h2>Compliant Solution</h2>
+<p>Remove the contradictory tag:</p>
+<pre>
+Feature: Feature development
+
+  @wip
+  Scenario: Work in progress feature
+    Given a new feature is being developed
+    When the feature is partially implemented
+    Then the tests should indicate incomplete work
+</pre>
+
+<h2>Configuration</h2>
+<p>
+  The <code>conflictPairs</code> parameter defines which tag pairs are
+  considered conflicting. Each pair uses <code>+</code> as separator, and
+  pairs are comma-separated. Tag names are specified without the
+  <code>@</code> prefix.
+</p>
+<table>
+  <tr><th>Parameter</th><th>Type</th><th>Default</th></tr>
+  <tr><td><code>conflictPairs</code></td><td>String</td><td><em>(empty)</em></td></tr>
+</table>
+<p>
+  Example: <code>wip+release-ready,manual+automated,slow+fast</code>
+</p>
+<p>
+  When the default empty value is used, the rule is effectively inactive
+  and will not report any issues.
+</p>

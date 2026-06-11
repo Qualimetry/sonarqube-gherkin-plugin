@@ -1,0 +1,27 @@
+# Posts a single comment on pull requests opened from a fork.
+# Keeps the Contributing policy visible without blocking issues or discussion.
+
+name: Comment on fork PR
+
+on:
+  pull_request:
+    types: [opened]
+
+jobs:
+  comment:
+    runs-on: ubuntu-latest
+    # Only run when the PR is from a fork (head repo is not this repo)
+    if: github.event.pull_request.head.repo.full_name != github.repository
+    permissions:
+      pull-requests: write
+    steps:
+      - name: Comment on fork PR
+        uses: actions/github-script@v7
+        with:
+          script: |
+            github.rest.issues.createComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.issue.number,
+              body: 'Thanks for your interest. We welcome **issues** and **feature requests**, but this project does not accept pull requests or other code contributions from third parties. The repository is maintained by the Qualimetry team only.\n\nIf you have a suggestion or bug report, please open an [issue](https://github.com/' + context.repo.owner + '/' + context.repo.repo + '/issues) instead.'
+            })

@@ -1,0 +1,44 @@
+<p>
+  Tags should not be placed on Examples sections. Tags should be placed on
+  Scenario Outlines instead. Tags on Examples sections are not meaningful
+  and should be moved up to the Scenario Outline level.
+</p>
+
+<h2>Noncompliant Code Example</h2>
+<p>Tags placed on Examples sections:</p>
+<pre>
+Feature: User login
+
+  Scenario Outline: User logs in with different credentials
+    Given the user navigates to login
+    When the user enters "&lt;username&gt;" and "&lt;password&gt;"
+    Then the user is authenticated
+
+    @smoke              &lt;!-- Noncompliant; tag on Examples --&gt;
+    Examples: Valid users
+      | username | password |
+      | alice    | secret   |
+      | bob      | secret   |
+</pre>
+
+<h2>Compliant Solution</h2>
+<p>Move tags to the Scenario Outline level:</p>
+<pre>
+Feature: User login
+
+  @smoke
+  Scenario Outline: User logs in with different credentials
+    Given the user navigates to login
+    When the user enters "&lt;username&gt;" and "&lt;password&gt;"
+    Then the user is authenticated
+
+    Examples: Valid users
+      | username | password |
+      | alice    | secret   |
+      | bob      | secret   |
+</pre>
+
+<p>
+  Note: Tags on Scenario Outlines apply to all Examples sections within that
+  outline, so there is no need to tag individual Examples sections.
+</p>

@@ -1,0 +1,58 @@
+<p>
+  Scenario names must be unique within and across all features. Duplicate
+  scenario names make it difficult to identify which specific test failed
+  in test reports and can lead to confusion when discussing test results
+  with team members. Each scenario should have a distinct name that clearly
+  describes the specific business behaviour being tested.
+</p>
+
+<h2>Noncompliant Code Example</h2>
+<pre>
+Feature: Order processing
+
+  Scenario: Process order                      &lt;!-- Noncompliant --&gt;
+    Given the customer has items in the cart
+    When the customer completes checkout
+    Then the order is created
+
+  Scenario: Process order                      &lt;!-- Noncompliant: duplicate name --&gt;
+    Given the customer has a saved order
+    When the customer confirms the order
+    Then the order is processed
+
+Feature: Order cancellation
+
+  Scenario: Process order                      &lt;!-- Noncompliant: duplicate across features --&gt;
+    Given an order exists
+    When the order is cancelled
+    Then the order status is "Cancelled"
+</pre>
+
+<h2>Compliant Solution</h2>
+<p>Use unique, descriptive scenario names:</p>
+<pre>
+Feature: Order processing
+
+  Scenario: Create new order from cart
+    Given the customer has items in the cart
+    When the customer completes checkout
+    Then the order is created
+
+  Scenario: Confirm saved order
+    Given the customer has a saved order
+    When the customer confirms the order
+    Then the order is processed
+
+Feature: Order cancellation
+
+  Scenario: Cancel existing order
+    Given an order exists
+    When the order is cancelled
+    Then the order status is "Cancelled"
+</pre>
+
+<h2>See Also</h2>
+<ul>
+  <li><code>unique-feature-name</code> &mdash; Feature names must be unique across all files</li>
+  <li><code>scenario-name-required</code> &mdash; Scenarios must have a non-empty name</li>
+</ul>

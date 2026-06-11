@@ -1,0 +1,49 @@
+<p>Tag lines (lines beginning with <code>@</code>) should not contain the <code>#</code>
+character. In Gherkin, <code>#</code> starts a comment, but on a tag line the comment
+syntax is ambiguous - the parser may treat everything after <code>#</code> as part
+of the last tag rather than as a comment. This leads to confusing behavior where
+tags appear to be "commented out" but are actually mangled into the preceding tag.</p>
+
+<p>If you need to disable a tag, move it to a dedicated comment line above the tag
+line, or remove it entirely.</p>
+
+<h2>Noncompliant Code Example</h2>
+<pre>
+Feature: User management
+
+  @smoke @regression # temporarily disabled @slow <!-- Noncompliant -->
+  Scenario: Create user
+    Given an admin user
+    When a new user is created
+    Then the user appears in the list
+
+  @api #@deprecated <!-- Noncompliant -->
+  Scenario: Delete user
+    Given an existing user
+    When the user is deleted
+    Then the user is removed
+</pre>
+
+<h2>Compliant Solution</h2>
+<pre>
+Feature: User management
+
+  # @slow tag temporarily removed
+  @smoke @regression
+  Scenario: Create user
+    Given an admin user
+    When a new user is created
+    Then the user appears in the list
+
+  @api
+  Scenario: Delete user
+    Given an existing user
+    When the user is deleted
+    Then the user is removed
+</pre>
+
+<h2>See Also</h2>
+<ul>
+  <li><code>comment-format</code> - enforces consistent comment formatting.</li>
+  <li><code>no-restricted-tags</code> - flags tags from a restricted list.</li>
+</ul>

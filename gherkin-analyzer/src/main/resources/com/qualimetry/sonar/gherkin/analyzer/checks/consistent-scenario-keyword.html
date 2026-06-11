@@ -1,0 +1,73 @@
+<p>All scenarios within a single <code>.feature</code> file should use the same
+keyword variant consistently. In Gherkin, <code>Scenario</code> and <code>Example</code>
+are synonyms for the same construct. Mixing both keywords in one file
+reduces readability and suggests inconsistent conventions.</p>
+
+<p>This rule tracks only non-outline scenario keywords. <code>Scenario Outline</code>
+and <code>Scenario Template</code> keywords are excluded because they represent a
+distinct construct (parameterized scenarios). The rule correctly handles
+localized keywords for non-English Gherkin files.</p>
+
+<p>When multiple keyword variants are found, the minority variant is flagged.
+For example, if three scenarios use <code>Scenario</code> and one uses
+<code>Example</code>, the single <code>Example</code> usage is reported.</p>
+
+<p>Alternatively, a fixed keyword can be enforced via the
+<code>preferredKeyword</code> parameter (e.g. <code>Scenario</code>): every
+scenario using a different keyword from the same family is then flagged,
+regardless of majority. <code>preferredOutlineKeyword</code> does the same
+for outline keywords (e.g. enforcing <code>Scenario Outline</code> over
+<code>Scenario Template</code>). When both parameters are empty (the
+default), majority mode applies and outline keywords are not checked.</p>
+
+<h2>Parameters</h2>
+<ul>
+  <li><code>preferredKeyword</code> &mdash; required keyword for scenarios; empty = majority mode (default empty)</li>
+  <li><code>preferredOutlineKeyword</code> &mdash; required keyword for scenario outlines; empty = not checked (default empty)</li>
+</ul>
+
+<h2>Noncompliant Code Example</h2>
+<pre>
+Feature: User management
+
+  Scenario: Create a new user                    <!-- OK (majority) -->
+    Given an admin user
+    When they create a new account
+    Then the account is active
+
+  Scenario: Delete a user                        <!-- OK (majority) -->
+    Given an admin user
+    When they delete an account
+    Then the account is removed
+
+  Example: Update a user                         <!-- Noncompliant -->
+    Given an admin user
+    When they update an account
+    Then the changes are saved
+</pre>
+
+<h2>Compliant Solution</h2>
+<pre>
+Feature: User management
+
+  Scenario: Create a new user
+    Given an admin user
+    When they create a new account
+    Then the account is active
+
+  Scenario: Delete a user
+    Given an admin user
+    When they delete an account
+    Then the account is removed
+
+  Scenario: Update a user
+    Given an admin user
+    When they update an account
+    Then the changes are saved
+</pre>
+
+<h2>See Also</h2>
+<ul>
+  <li><code>consistent-feature-language</code> - Ensures all feature files use the same Gherkin language.</li>
+  <li><code>use-scenario-outline-for-examples</code> - Ensures the correct keyword is used with Examples tables.</li>
+</ul>

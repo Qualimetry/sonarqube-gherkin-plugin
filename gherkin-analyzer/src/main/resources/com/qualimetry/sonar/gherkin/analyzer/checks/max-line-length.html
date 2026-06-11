@@ -1,0 +1,52 @@
+<p>
+  Checks that no line in a feature file exceeds a configurable maximum length.
+  Long lines are hard to read, force horizontal scrolling in editors, and make
+  side-by-side diffs in code review tools difficult to follow. Every raw line
+  of the file is checked, including steps, data tables, comments, and doc
+  strings.
+</p>
+<p>
+  The default limit is 120 characters. Teams can adjust this threshold based
+  on their project conventions.
+</p>
+<h2>Noncompliant Code Example</h2>
+<p>With <code>maxLength</code> set to <code>120</code>:</p>
+<pre>
+Feature: Order processing
+
+  Scenario: Submit an order
+    Given the user has an order
+    When the user submits the order with customer reference "ACME-2026-0001", priority "express", and delivery note "rear dock"  &lt;!-- Noncompliant - line exceeds 120 characters --&gt;
+    Then the order is accepted
+</pre>
+<h2>Compliant Solution</h2>
+<p>Split long content across steps or a data table:</p>
+<pre>
+Feature: Order processing
+
+  Scenario: Submit an order
+    Given the user has an order
+    When the user submits the order with:
+      | customer reference | ACME-2026-0001 |
+      | priority           | express        |
+      | delivery note      | rear dock      |
+    Then the order is accepted
+</pre>
+<h2>Configuration</h2>
+<table>
+  <tr>
+    <th>Parameter</th>
+    <th>Description</th>
+    <th>Default</th>
+  </tr>
+  <tr>
+    <td><code>maxLength</code></td>
+    <td>Maximum number of characters allowed in a line.</td>
+    <td><code>120</code></td>
+  </tr>
+</table>
+<h2>See Also</h2>
+<ul>
+  <li><code>step-sentence-max-length</code> - limits the length of the step sentence text.</li>
+  <li><code>feature-file-max-lines</code> - limits the number of lines per feature file.</li>
+</ul>
